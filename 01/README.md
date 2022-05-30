@@ -45,7 +45,20 @@ brew install openfpgaloader --HEAD
 
 ### 编译
 
+```bash
+iverilog -o Xor_tb.vvp Xor_tb.v
+```
+
+
+
 ### 仿真（模拟）
+
+```bash
+vvp sample_tb.vvp
+open -a gtkwave
+```
+
+
 
 ### 上传到 tangnano
 
