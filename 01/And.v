@@ -11,9 +11,11 @@ module And(
 	input b,
 	output out
 );
+    wire notaandb;
 
 // your implementation comes here:
-
+    Nand NAND(.a(a), .b(b), .out(notaandb));
+    Not NOT(.in(notaandb), .out(out));
 
 
 endmodule

@@ -4,7 +4,6 @@
  *       0 otherwise
  */
 `default_nettype none
- `include "Not.v"
 module Or(
 	input a,
 	input b,
