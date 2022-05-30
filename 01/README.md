@@ -10,5 +10,27 @@
 
 - tangnano 4k
 
+硬件采用国产的 tangnano 而没有采用国外大厂的。一方面为了支持国产 IC 一方面中国做为主要以制造业为主的国家国产的 Fpga 性价比较高。
+
+### 搭建环境
+
+常见的 EDA 工具一般仅支持 windows 和 linux ，这里不对专有和开源软件的优劣做对比了，以免引战。在本教程中我尽量使用开源软件。
+
+```bash
+# 安装综合的工具
+brew install yosys
+pip install apycula
+brew install eigen
+
+# 安装 gowin 的布线工具
+git clone git@github.com:YosysHQ/nextpnr.git
+cmake . -DARCH=gowin
+make -j$(nproc)
+sudo make install
+# 参考 https://github.com/YosysHQ/nextpnr#nextpnr-gowin
+```
+
+
+
 ### 结果
 [<img src="https://tva1.sinaimg.cn/large/e6c9d24egy1h2qp7wk0ttj20c60iadh8.jpg" alt="" style="zoom:50%;" />](https://youtube.com/shorts/S9ERI2q2dWQ?feature=share)
