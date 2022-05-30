@@ -28,6 +28,9 @@ cmake . -DARCH=gowin
 make -j$(nproc)
 sudo make install
 # 参考 https://github.com/YosysHQ/nextpnr#nextpnr-gowin
+
+# 安装刷入 Fpga 的工具
+brew install openfpgaloader --HEAD
 ```
 
 综合和布线其实就是生产电路，和物理的连接电路一样，具体的 Fpga 的原理请参考 https://zh.wikipedia.org/zh-tw/%E7%8E%B0%E5%9C%BA%E5%8F%AF%E7%BC%96%E7%A8%8B%E9%80%BB%E8%BE%91%E9%97%A8%E9%98%B5%E5%88%97 。
@@ -48,7 +51,31 @@ sudo make install
 
 #### 综合
 
+```bash
+yosys -p "read_verilog Xor.v; synth_gowin -json Xor.json"
+```
+
+
+
+```bash
+nextpnr-gowin --json Xor.json --write pnrXor.json --device GW1NSR-LV4CQN48PC6/I5 --cst tangnano4k.cst
+```
+
+
+
+```bash
+gowin_pack -d GW1NSR-LV4CQN48PC6/I5 -o pack.fs pnrXor.json
+```
+
+
+
 #### 写入硬件
+
+```bash
+openFPGALoader -b tangnano4k pack.fs
+```
+
+
 
 #### 测试
 
