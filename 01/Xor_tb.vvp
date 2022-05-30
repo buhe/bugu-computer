@@ -1,0 +1,125 @@
+#! /usr/local/Cellar/icarus-verilog/11.0/bin/vvp
+:ivl_version "11.0 (stable)";
+:ivl_delay_selection "TYPICAL";
+:vpi_time_precision + 0;
+:vpi_module "/usr/local/Cellar/icarus-verilog/11.0/lib/ivl/system.vpi";
+:vpi_module "/usr/local/Cellar/icarus-verilog/11.0/lib/ivl/vhdl_sys.vpi";
+:vpi_module "/usr/local/Cellar/icarus-verilog/11.0/lib/ivl/vhdl_textio.vpi";
+:vpi_module "/usr/local/Cellar/icarus-verilog/11.0/lib/ivl/v2005_math.vpi";
+:vpi_module "/usr/local/Cellar/icarus-verilog/11.0/lib/ivl/va_math.vpi";
+S_0x7fec58204080 .scope module, "Xor_tb" "Xor_tb" 2 3;
+ .timescale 0 0;
+v0x6000003dcb40_0 .var "a", 0 0;
+v0x6000003dcbd0_0 .var "b", 0 0;
+v0x6000003dcc60_0 .var/i "file", 31 0;
+o0x7fec58032308 .functor BUFZ 1, C4<z>; HiZ drive
+v0x6000003dccf0_0 .net "out", 0 0, o0x7fec58032308;  0 drivers
+S_0x7fec582041f0 .scope module, "XOR" "Xor" 2 11, 3 10 0, S_0x7fec58204080;
+ .timescale 0 0;
+    .port_info 0 /INPUT 1 "a";
+    .port_info 1 /INPUT 1 "b";
+    .port_info 2 /OUTPUT 1 "out";
+v0x6000003dc750_0 .net "a", 0 0, v0x6000003dcb40_0;  1 drivers
+v0x6000003dc7e0_0 .net "b", 0 0, v0x6000003dcbd0_0;  1 drivers
+o0x7fec58032128 .functor BUFZ 1, C4<z>; HiZ drive
+v0x6000003dc870_0 .net "nota", 0 0, o0x7fec58032128;  0 drivers
+o0x7fec58032038 .functor BUFZ 1, C4<z>; HiZ drive
+v0x6000003dc900_0 .net "notb", 0 0, o0x7fec58032038;  0 drivers
+v0x6000003dc990_0 .net "out", 0 0, o0x7fec58032308;  alias, 0 drivers
+o0x7fec58032068 .functor BUFZ 1, C4<z>; HiZ drive
+v0x6000003dca20_0 .net "w1", 0 0, o0x7fec58032068;  0 drivers
+o0x7fec58032188 .functor BUFZ 1, C4<z>; HiZ drive
+v0x6000003dcab0_0 .net "w2", 0 0, o0x7fec58032188;  0 drivers
+S_0x7fec58204360 .scope module, "AND1" "And" 3 22, 4 9 0, S_0x7fec582041f0;
+ .timescale 0 0;
+    .port_info 0 /INPUT 1 "a";
+    .port_info 1 /INPUT 1 "b";
+    .port_info 2 /OUTPUT 1 "out";
+v0x6000003dc000_0 .net "a", 0 0, v0x6000003dcb40_0;  alias, 1 drivers
+v0x6000003dc090_0 .net "b", 0 0, o0x7fec58032038;  alias, 0 drivers
+v0x6000003dc120_0 .net "out", 0 0, o0x7fec58032068;  alias, 0 drivers
+S_0x7fec582044d0 .scope module, "AND2" "And" 3 23, 4 9 0, S_0x7fec582041f0;
+ .timescale 0 0;
+    .port_info 0 /INPUT 1 "a";
+    .port_info 1 /INPUT 1 "b";
+    .port_info 2 /OUTPUT 1 "out";
+v0x6000003dc1b0_0 .net "a", 0 0, o0x7fec58032128;  alias, 0 drivers
+v0x6000003dc240_0 .net "b", 0 0, v0x6000003dcbd0_0;  alias, 1 drivers
+v0x6000003dc2d0_0 .net "out", 0 0, o0x7fec58032188;  alias, 0 drivers
+S_0x7fec58204640 .scope module, "NOT1" "Not" 3 17, 5 7 0, S_0x7fec582041f0;
+ .timescale 0 0;
+    .port_info 0 /INPUT 1 "in";
+    .port_info 1 /OUTPUT 1 "out";
+v0x6000003dc360_0 .net "in", 0 0, v0x6000003dcb40_0;  alias, 1 drivers
+v0x6000003dc3f0_0 .net "out", 0 0, o0x7fec58032128;  alias, 0 drivers
+S_0x7fec582047b0 .scope module, "NOT2" "Not" 3 18, 5 7 0, S_0x7fec582041f0;
+ .timescale 0 0;
+    .port_info 0 /INPUT 1 "in";
+    .port_info 1 /OUTPUT 1 "out";
+v0x6000003dc480_0 .net "in", 0 0, v0x6000003dcbd0_0;  alias, 1 drivers
+v0x6000003dc510_0 .net "out", 0 0, o0x7fec58032038;  alias, 0 drivers
+S_0x7fec58204920 .scope module, "OR" "Or" 3 25, 6 8 0, S_0x7fec582041f0;
+ .timescale 0 0;
+    .port_info 0 /INPUT 1 "a";
+    .port_info 1 /INPUT 1 "b";
+    .port_info 2 /OUTPUT 1 "out";
+v0x6000003dc5a0_0 .net "a", 0 0, o0x7fec58032068;  alias, 0 drivers
+v0x6000003dc630_0 .net "b", 0 0, o0x7fec58032188;  alias, 0 drivers
+v0x6000003dc6c0_0 .net "out", 0 0, o0x7fec58032308;  alias, 0 drivers
+S_0x7fec58204a90 .scope task, "display" "display" 2 17, 2 17 0, S_0x7fec58204080;
+ .timescale 0 0;
+TD_Xor_tb.display ;
+    %delay 1, 0;
+    %vpi_call 2 18 "$fwrite", v0x6000003dcc60_0, "| %1b | %1b | %1b |\012", v0x6000003dcb40_0, v0x6000003dcbd0_0, v0x6000003dccf0_0 {0 0 0};
+    %end;
+    .scope S_0x7fec58204080;
+T_1 ;
+    %pushi/vec4 0, 0, 1;
+    %store/vec4 v0x6000003dcb40_0, 0, 1;
+    %pushi/vec4 0, 0, 1;
+    %store/vec4 v0x6000003dcbd0_0, 0, 1;
+    %end;
+    .thread T_1;
+    .scope S_0x7fec58204080;
+T_2 ;
+    %vpi_call 2 22 "$dumpfile", "Xor_tb.vcd" {0 0 0};
+    %vpi_call 2 23 "$dumpvars", 32'sb00000000000000000000000000000000, S_0x7fec58204080 {0 0 0};
+    %vpi_func 2 24 "$fopen" 32, "Xor.out", "w" {0 0 0};
+    %store/vec4 v0x6000003dcc60_0, 0, 32;
+    %vpi_call 2 25 "$fwrite", v0x6000003dcc60_0, "| a | b |out|\012" {0 0 0};
+    %pushi/vec4 0, 0, 1;
+    %store/vec4 v0x6000003dcb40_0, 0, 1;
+    %pushi/vec4 0, 0, 1;
+    %store/vec4 v0x6000003dcbd0_0, 0, 1;
+    %fork TD_Xor_tb.display, S_0x7fec58204a90;
+    %join;
+    %pushi/vec4 0, 0, 1;
+    %store/vec4 v0x6000003dcb40_0, 0, 1;
+    %pushi/vec4 1, 0, 1;
+    %store/vec4 v0x6000003dcbd0_0, 0, 1;
+    %fork TD_Xor_tb.display, S_0x7fec58204a90;
+    %join;
+    %pushi/vec4 1, 0, 1;
+    %store/vec4 v0x6000003dcb40_0, 0, 1;
+    %pushi/vec4 0, 0, 1;
+    %store/vec4 v0x6000003dcbd0_0, 0, 1;
+    %fork TD_Xor_tb.display, S_0x7fec58204a90;
+    %join;
+    %pushi/vec4 1, 0, 1;
+    %store/vec4 v0x6000003dcb40_0, 0, 1;
+    %pushi/vec4 1, 0, 1;
+    %store/vec4 v0x6000003dcbd0_0, 0, 1;
+    %fork TD_Xor_tb.display, S_0x7fec58204a90;
+    %join;
+    %vpi_call 2 38 "$finish" {0 0 0};
+    %end;
+    .thread T_2;
+# The file index is used to find the file name in the following table.
+:file_names 7;
+    "N/A";
+    "<interactive>";
+    "Xor_tb.v";
+    "./Xor.v";
+    "./And.v";
+    "./Not.v";
+    "./Or.v";

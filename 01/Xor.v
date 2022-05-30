@@ -2,6 +2,9 @@
 * Xor (exclusive or) gate:
 * If a<>b out=1 else out=0.
 */
+`include "Not.v"
+`include "And.v"
+`include "Or.v"
 `default_nettype none
 
 module Xor(

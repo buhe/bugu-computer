@@ -1,3 +1,4 @@
+`include "Xor.v"
 `default_nettype none
 module Xor_tb();
 
