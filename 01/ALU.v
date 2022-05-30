@@ -15,6 +15,7 @@ output zr;
 output ng;
 
 reg tempx;
+wire tempnotx;
 
 always @* //NOTE: You are describing combo logic, since there is no clock signal
 begin
@@ -23,6 +24,8 @@ begin
         tempx = 0;
       else 
         tempx = x;
+        
 end
+not g1(tempnotx, tempx);
     
 endmodule
