@@ -4,6 +4,8 @@
 
 从与或非门开始构建一个计算机的教程（写给软件工程师）
 
+[01](01/)
+
 参考
 
 - https://gitlab.com/x653/nand2tetris-fpga
