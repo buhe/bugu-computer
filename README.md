@@ -4,3 +4,7 @@
 
 从与或非门开始构建一个计算机教程（写给软件工程师）
 
+参考
+
+- https://gitlab.com/x653/nand2tetris-fpga
+- https://www.nand2tetris.org/
