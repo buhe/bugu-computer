@@ -5,3 +5,6 @@ sym-dmux:
 
 flash:
 	openFPGALoader -b tangnano4k pack.fs
+
+compile-mux:
+	iverilog -o Mux.vvp Mux.v
