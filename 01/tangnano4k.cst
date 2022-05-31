@@ -2,3 +2,4 @@
 IO_LOC "out" 10;
 IO_LOC "a" 15;
 IO_LOC "b" 14;
+IO_LOC "out2" 2;
