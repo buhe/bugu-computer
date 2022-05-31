@@ -1,5 +1,5 @@
 // these are the HDMI pins!
-IO_LOC "out" 10;
-IO_LOC "a" 15;
-IO_LOC "b" 14;
-IO_LOC "out2" 2;
+IO_LOC "a" 10;
+IO_LOC "in" 15;
+IO_LOC "sel" 14;
+IO_LOC "b" 2;
