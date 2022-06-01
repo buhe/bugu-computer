@@ -251,43 +251,55 @@ open -a gtkwave
 
 #### 比较
 
+*.cmp 是提供的比较文件， *.out 是我们执行仿真产生的结果文件。二者应该是相同的，采用这种方式来断言我们的程序写的对不对。
+
 ```bash
 diff Xor.out Xor.cmp
 ```
 
-
+如果程序写的对什么也不输出，否则输出不同的地方。
 
 ### 上传到 tangnano
 
-#### 综合
+#### 综合和布线
+
+综合和布线就是通过 verilog 产生电路的过程。
 
 ```bash
 yosys -p "read_verilog Xor.v; synth_gowin -json Xor.json"
 ```
 
+综合比较简单，布线需要引入所谓的约束文件：
 
+```
+IO_LOC "out" 10;
+IO_LOC "a" 15;
+IO_LOC "b" 14;
+```
+
+14 和 15 是 tangnano 的两个按钮，分别被绑定到了 a b ，10 是 led 灯。需要注意的是按钮松开的时候是 1 ，按下是 0 。约束文件把程序中的变量绑定到了实际的物理硬件，改变物理量就改变了变量。
 
 ```bash
 nextpnr-gowin --json Xor.json --write pnrXor.json --device GW1NSR-LV4CQN48PC6/I5 --cst tangnano4k.cst
 ```
 
-
+最后生成二进制文件。
 
 ```bash
 gowin_pack -d GW1NSR-LV4CQN48PC6/I5 -o pack.fs pnrXor.json
 ```
 
-
-
 #### 写入硬件
+
+刷入 Fpga 。
 
 ```bash
 openFPGALoader -b tangnano4k pack.fs
 ```
 
-
-
 #### 测试
+
+实际按下按钮试试。当按钮的状态不同时，结果为 1 ，反之结果为 0。完成了异或门。下面是视频，点击即可。
 
 ### 结果
 [<img src="https://tva1.sinaimg.cn/large/e6c9d24egy1h2qp7wk0ttj20c60iadh8.jpg" alt="" style="zoom:50%;" />](https://youtube.com/shorts/S9ERI2q2dWQ?feature=share)
