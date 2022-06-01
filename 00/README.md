@@ -37,11 +37,175 @@ brew install openfpgaloader --HEAD
 
 ### Nand
 
+Nand 又称为与非门，其他门一般通过它来构建，是基本门电路，原因如下：
+
+1. 考虑电子元件的成本，也许从逻辑上来看与非门和或非门比与门和非门更复杂，但是实际上由于Mos管的物理结构，实现与非门和或非门需要的元件其实更少，成本更低，而简单的与门和或门其实在结构上比前者更复杂。
+2. 或非门和与非门具有逻辑完备性，任何一个门通过组合可以实现任意电路，而与门和或门不具有这样的能力
+3. 仍然和电子元件的物理结构有关，与非门和或非门实际运行效率比与门和或门更高。
+
+与非门的真值表：
+
+| A    | B    | A NAND B |
+| ---- | ---- | -------- |
+| 0    | 0    | 1        |
+| 0    | 1    | 1        |
+| 1    | 0    | 1        |
+| 1    | 1    | 0        |
+
 ### 非
+
+非门是用 Nand（与非门）实现的，代码如下：
+
+```verilog
+/**
+ * Not gate:
+ * out = not in
+ */
+`include "Nand.v"
+`default_nettype none
+
+module Not(
+	input in,
+	output out
+);
+Nand NAND(.a(in), .b(1'b1), .out(out));
+endmodule
+```
+
+非门顾名思义就是取反操作，0 转成 1 ， 1 转成 0 。所以只要输入和 1 与然后取反就可以了，利用与非门很容易做到。
 
 ### 或
 
+```verilog
+ /**
+ * Or gate:
+ * out = 1 if (a == 1 or b == 1)
+ *       0 otherwise
+ */
+`default_nettype none
+module Or(
+	input a,
+	input b,
+	output out
+);
+    wire nota;
+    wire notb;
+    Not NOT1(.in(a), .out(nota));
+    Not NOT2(.in(b), .out(notb));
+    Nand NAND(.a(nota), .b(notb), .out(out));
+
+
+endmodule
+```
+
+
+
 ### 与
+
+```verilog
+/**
+ * And gate: 
+ * out = 1 if (a == 1 and b == 1)
+ *       0 otherwise
+ */
+
+`default_nettype none
+
+module And(
+	input a,
+	input b,
+	output out
+);
+    wire notaandb;
+
+// your implementation comes here:
+    Nand NAND(.a(a), .b(b), .out(notaandb));
+    Not NOT(.in(notaandb), .out(out));
+
+
+endmodule
+```
+
+### 异或
+
+```verilog
+/** 
+* Xor (exclusive or) gate:
+* If a<>b out=1 else out=0.
+*/
+`include "Not.v"
+`include "And.v"
+`include "Or.v"
+`default_nettype none
+
+module Xor(
+	input wire a,
+	input wire b,
+	output wire out
+);
+	wire nota;		//new wire must be declared
+	wire notb;
+	Not NOT1(.in(a), .out(nota));	 //NOT1 is instance name
+	Not NOT2(.in(b), .out(notb));
+	
+	wire w1;
+	wire w2;
+	And AND1(.a(a),.b(notb),.out(w1));
+	And AND2(.a(nota),.b(b),.out(w2));
+
+	Or OR(.a(w1),.b(w2),.out(out));
+endmodule
+```
+
+
+
+### 激励
+
+```verilog
+`include "Xor.v"
+`default_nettype none
+module Xor_tb();
+
+	integer file;
+
+	reg a = 0;
+	reg b = 0;
+	wire out;
+	
+	Xor XOR(
+	    .a(a),
+		.b(b),
+	    .out(out)
+	  );
+
+	task display;
+    	#1 $fwrite(file, "| %1b | %1b | %1b |\n", a,b,out);
+  	endtask
+  	
+  	initial begin
+  		$dumpfile("Xor_tb.vcd");
+  		$dumpvars(0, Xor_tb);
+		file = $fopen("Xor.out","w");
+    	$fwrite(file, "| a | b |out|\n");
+		
+		a=0;b=0;
+		display();
+  		
+		a=0;b=1;
+		display();
+		
+		a=1;b=0;
+		display();
+		
+		a=1;b=1;
+		display();
+		$finish();	
+	end
+
+endmodule
+```
+
+
 
 ### 编译
 
