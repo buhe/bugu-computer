@@ -14,3 +14,12 @@ sim-mux:
 
 diff-mux:
 	diff Mux.out Mux.cmp
+
+compile-and16:
+	iverilog -o And16_tb.vvp And16_tb.v
+
+sim-and16:
+	vvp And16_tb.vvp
+
+diff-and16:
+	diff And16.out And16.cmp
