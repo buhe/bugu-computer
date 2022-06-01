@@ -37,6 +37,14 @@ IO_LOC "sel" 14; // right hand default 1
 IO_LOC "b" 2; // blue
 ```
 
+执行以下命令写入 Fpga
+
+```bash
+make sym|dmux:
+
+make flash
+```
+
 因为开关（14 也就是右边那个按钮）松开默认是 1 ，所以当写入 Fpga 后什么都不做，sel 等于 1 ，b 的信号等于 in 的信号，此时因为 in 绑定到按钮上（15 左边的按钮）也默认为 1 ，所以 b 为 1 ，连接到 gpio 2 的 led 发光（因为是 1 也就是高电平）。按下右边的按钮（sel），sel 等于 0 ，in 分配给了 a，红灯（10）亮，外接的 led（2）灭。
 
 ### 其他
