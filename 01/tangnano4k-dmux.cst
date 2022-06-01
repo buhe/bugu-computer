@@ -1,5 +1,5 @@
 // these are the HDMI pins!
 IO_LOC "a" 10; // red
 IO_LOC "in" 15;
-IO_LOC "sel" 14; // right
+IO_LOC "sel" 14; // right hand default 1
 IO_LOC "b" 2; // blue
