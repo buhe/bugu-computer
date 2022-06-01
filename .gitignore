@@ -7,3 +7,6 @@
 01/pack.fs
 01/pnrDMux.json
 01/Mux.vvp
+01/Mux_tb.vvp
+01/Mux_tb.vcd
+01/Mux.out

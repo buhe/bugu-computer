@@ -17,14 +17,14 @@ module Mux_tb();
 	  );
 
 	task display;
-    	#1 $fwrite(file, "|   %1b   |   %1b   |   %1b   |   %1b   |\n", a,b,sel,out);
+    	#1 $fwrite(file, "|%1b|%1b|%1b|%1b|\n", a,b,sel,out);
   	endtask
   	
   	initial begin
   		$dumpfile("Mux_tb.vcd");
   		$dumpvars(0, Mux_tb);
 		file = $fopen("Mux.out","w");
-    	$fwrite(file, "|   a   |   b   |  sel  |  out  |\n");
+    	$fwrite(file, "|a|b|sel|out|\n");
 		
 		a=0;b=0;sel=0;
 		display();
