@@ -31,6 +31,12 @@ sudo make install
 
 # 安装刷入 Fpga 的工具
 brew install openfpgaloader --HEAD
+
+# 安装编译成可仿真的文件
+brew install icarus-verilog
+
+# 安装查看波形的软件
+brew install --cask gtkwave
 ```
 
 > 综合和布线其实就是生成电路，和物理的连接电路一样，具体的 Fpga 的原理请参考 https://zh.wikipedia.org/zh-tw/%E7%8E%B0%E5%9C%BA%E5%8F%AF%E7%BC%96%E7%A8%8B%E9%80%BB%E8%BE%91%E9%97%A8%E9%98%B5%E5%88%97 。
@@ -172,6 +178,10 @@ endmodule
 
 ### 激励
 
+所谓激励和软件工程师的单元测试差不多，以下激励就是用来测试异或门的，很好理解。
+
+a = ... b= ... 就是给 a b 赋值来测试在不同取值下的结果。结果通过 display 写入Xor.out 文件中，波形写入 Xor_tb.vcd 中，待会介绍波形。
+
 ```verilog
 `include "Xor.v"
 `default_nettype none
@@ -220,17 +230,29 @@ endmodule
 
 ### 编译
 
+编译 Xor_tb.v，有编译错误在这步就会打印出来。
+
 ```bash
 iverilog -o Xor_tb.vvp Xor_tb.v
 ```
 
-
-
 ### 仿真（模拟）
+
+所谓仿真其实就是模拟，仿真其实就是模拟硬件，在不同的输入（信号）下展现不同的波形。
 
 ```bash
 vvp sample_tb.vvp
 open -a gtkwave
+```
+
+使用 gtkwave 查看波形，右键点击Xor_tb ，选择 a b out ，然后 append ，删除内部变量。可以看到当 a b 不同结果为 1 （高电平）。
+
+#### ![Xor](https://tva1.sinaimg.cn/large/e6c9d24egy1h2sll4iicfj20x40abgmv.jpg)
+
+#### 比较
+
+```bash
+diff Xor.out Xor.cmp
 ```
 
 
