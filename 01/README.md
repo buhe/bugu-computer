@@ -40,7 +40,7 @@ IO_LOC "b" 2; // blue
 执行以下命令写入 Fpga
 
 ```bash
-make sym-dmux:
+make sym-dmux
 
 make flash
 ```
