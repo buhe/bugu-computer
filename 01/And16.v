@@ -7,7 +7,7 @@
 `include "Not.v"
 `include "And.v"
 `default_nettype none
-module Add16(
+module And16(
 	input wire [15:0] a,
 	input wire [15:0] b,
 	output wire [15:0] out
