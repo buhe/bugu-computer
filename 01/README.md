@@ -49,5 +49,53 @@ make flash
 
 ### 其他
 
-这次的其他电路输入都大于 2 个，在 Fpga 上很难测试，所以选择用仿真测试。
+这次的其他电路输入都大于 2 个，我们的 Fpga 只有两个按钮，在其上很难测试，虽然也可以连接额外的按钮，可 And16 有 16 个输入，同时按不现实，所以选择用仿真测试，以 And16 为例，其他同理。
+
+And16 其实就是 16 个与门按位与：
+
+```verilog
+`include "Not.v"
+`include "And.v"
+`default_nettype none
+module And16(
+	input wire [15:0] a,
+	input wire [15:0] b,
+	output wire [15:0] out
+);
+    And AND1(.a(a[0]),.b(b[0]),.out(out[0]));
+    And AND2(.a(a[1]),.b(b[1]),.out(out[1]));
+    And AND3(.a(a[2]),.b(b[2]),.out(out[2]));
+    And AND4(.a(a[3]),.b(b[3]),.out(out[3]));
+    And AND5(.a(a[4]),.b(b[4]),.out(out[4]));
+    And AND6(.a(a[5]),.b(b[5]),.out(out[5]));
+    And AND7(.a(a[6]),.b(b[6]),.out(out[6]));
+    And AND8(.a(a[7]),.b(b[7]),.out(out[7]));
+    And AND9(.a(a[8]),.b(b[8]),.out(out[8]));
+    And AND10(.a(a[9]),.b(b[9]),.out(out[9]));
+    And AND11(.a(a[10]),.b(b[10]),.out(out[10]));
+    And AND12(.a(a[11]),.b(b[11]),.out(out[11]));
+    And AND13(.a(a[12]),.b(b[12]),.out(out[12]));
+    And AND14(.a(a[13]),.b(b[13]),.out(out[13]));
+    And AND15(.a(a[14]),.b(b[14]),.out(out[14]));
+    And AND16(.a(a[15]),.b(b[15]),.out(out[15]));
+endmodule
+```
+
+很简单，可以看到创建了 16 个与门，a b 每一位相与结果放在 out 的对应位。
+
+编译，执行测试（仿真，激励）。
+
+```bash
+iverilog -o And16_tb.vvp And16_tb.v
+
+vvp And16_tb.vvp
+```
+
+测试会把结果写入 *.out 文件里，然后和提供的 *.cmp 比较就可以了，如果一样就代表通过了。
+
+```bash
+diff And16.out And16.cmp
+```
+
+
 
