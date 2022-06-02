@@ -13,3 +13,6 @@
 01/And16.out
 01/And16_tb.vvp
 01/And16_tb.vcd
+01/DMux4Way_tb.vcd
+01/DMux4Way_tb.vvp
+01/DMux4Way.out

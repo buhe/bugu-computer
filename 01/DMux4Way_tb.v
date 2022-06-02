@@ -30,16 +30,22 @@ module DMux4Way_tb();
 		file = $fopen("DMux4Way.out","w");
     	$fwrite(file, "|in|sel|a|b|c|d|\n");
 		
+        sel = 2'b00;
 		display();
-
+        sel = 2'b01;
 		display();
-  		
+  		sel = 2'b10;
 		display();
-
+        sel = 2'b11;
 		display();
-		
+		in = 1'b1;
+        sel = 2'b00;
 		display();
-
+        sel = 2'b01;
+		display();
+        sel = 2'b10;
+		display();
+        sel = 2'b11;
 		display();
 		$finish();	
 	end
