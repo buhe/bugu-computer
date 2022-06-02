@@ -34,11 +34,11 @@ diff-dmux4way:
 	diff DMux4Way.out DMux4Way.cmp
 
 
-compile-dmux:
-	iverilog -o DMux_tb.vvp DMux_tb.v
+compile-dmux8way:
+	iverilog -o DMux8Way_tb.vvp DMux8Way_tb.v
 
-sim-dmux:
-	vvp DMux_tb.vvp
+sim-dmux8way:
+	vvp DMux8Way_tb.vvp
 
-diff-dmux:
-	diff DMux.out DMux.cmp
+diff-dmux8way:
+	diff DMux8Way.out DMux8Way.cmp

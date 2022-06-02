@@ -5,7 +5,7 @@
  *                            etc.
  *                            {0, 0, 0, 0, 0, 0, 0, in} if sel == 111
  */
-
+ `include "DMux4Way.v"
 module DMux8Way(
 	input wire in,
 	input wire [2:0] sel,
@@ -20,8 +20,14 @@ module DMux8Way(
 	);
 
 	// your implementation comes here:
-
-
+    //   DMux(in=in, sel=sel[2], a=abcd, b=efgh);
+    // DMux4Way(in=abcd, sel=sel[0..1], a=a, b=b, c=c, d=d);
+    // DMux4Way(in=efgh, sel=sel[0..1], a=e, b=f, c=g, d=h);
+    wire abcd;
+    wire efgh;
+    DMux DMUX1(.in(in), .sel(sel[2]), .a(abcd), .b(efgh));
+    DMux4Way DMUX2(.in(abcd), .sel(sel[1:0]), .a(a), .b(b),.c(c), .d(d));
+    DMux4Way DMUX3(.in(efgh), .sel(sel[1:0]), .a(e), .b(f),.c(g), .d(h));
 
 
 endmodule
