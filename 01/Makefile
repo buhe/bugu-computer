@@ -23,3 +23,12 @@ sim-and16:
 
 diff-and16:
 	diff And16.out And16.cmp
+
+compile-dmux4way:
+	iverilog -o DMux4Way_tb.vvp DMux4Way_tb.v
+
+sim-dmux4way:
+	vvp DMux4Way_tb.vvp
+
+diff-dmux4way:
+	diff DMux4Way.out DMux4Way.cmp
