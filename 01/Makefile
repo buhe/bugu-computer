@@ -42,3 +42,12 @@ sim-dmux8way:
 
 diff-dmux8way:
 	diff DMux8Way.out DMux8Way.cmp
+
+compile-not16:
+	iverilog -o Not16_tb.vvp Not16_tb.v
+
+sim-not16:
+	vvp Not16_tb.vvp
+
+diff-not16:
+	diff Not16.out Not16.cmp
