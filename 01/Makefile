@@ -32,3 +32,13 @@ sim-dmux4way:
 
 diff-dmux4way:
 	diff DMux4Way.out DMux4Way.cmp
+
+
+compile-dmux:
+	iverilog -o DMux_tb.vvp DMux_tb.v
+
+sim-dmux:
+	vvp DMux_tb.vvp
+
+diff-dmux:
+	diff DMux.out DMux.cmp
