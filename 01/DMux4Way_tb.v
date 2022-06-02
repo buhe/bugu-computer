@@ -6,10 +6,10 @@ module DMux4Way_tb();
 
 	reg in = 1'b0;
 	reg[1:0] sel = 2'b00;
-	wire a = 1'b0;
-	wire b = 1'b0;
-	wire c = 1'b0;
-	wire d = 1'b0;
+	wire a;
+	wire b;
+	wire c;
+	wire d;
 	
 	DMux4Way DMUX4WAY(
 	    .in(in),
