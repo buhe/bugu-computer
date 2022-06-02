@@ -6,8 +6,8 @@ module DMux_tb();
 
 	reg in = 1'b0;
 	reg sel = 1'b0;
-	wire a = 1'b0;
-	wire b = 1'b0;
+	wire a;
+	wire b;
 	
 	DMux DMUX(
 	    .in(in),
