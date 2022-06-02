@@ -1,45 +1,45 @@
 `include "DMux4Way.v"
 `default_nettype none
-module And16_tb();
+module DMux4Way_tb();
 
 	integer file;
 
-	reg[15:0] a = 16'b0000000000000000;
-	reg[15:0] b = 16'b0000000000000000;
-	wire[15:0] out;
+	reg in = 1'b0;
+	reg[1:0] sel = 2'b00;
+	wire a = 1'b0;
+	wire b = 1'b0;
+	wire c = 1'b0;
+	wire d = 1'b0;
 	
-	And16 AND16(
+	DMux4Way DMUX4WAY(
+	    .in(in),
+	    .sel(sel),
 	    .a(a),
 		.b(b),
-	    .out(out)
+		.c(c),
+		.d(d)
 	  );
 
 	task display;
-    	#1 $fwrite(file, "|%16b|%16b|%16b|\n", a,b,out);
+    	#1 $fwrite(file, "|%1b|%2b|%1b|%1b|%1b|%1b|\n", in,sel,a,b,c,d);
   	endtask
   	
   	initial begin
-  		$dumpfile("And16_tb.vcd");
-  		$dumpvars(0, And16_tb);
-		file = $fopen("And16.out","w");
-    	$fwrite(file, "|a|b|out|\n");
+  		$dumpfile("DMux4Way_tb.vcd");
+  		$dumpvars(0, DMux4Way_tb);
+		file = $fopen("DMux4Way.out","w");
+    	$fwrite(file, "|in|sel|a|b|c|d|\n");
 		
-		a=16'b0000000000000000;b=16'b0000000000000000;
 		display();
 
-        a=16'b0000000000000000;b=16'b1111111111111111;
 		display();
   		
-		a=16'b1111111111111111;b=16'b1111111111111111;
 		display();
 
-        a=16'b1010101010101010;b=16'b0101010101010101;
 		display();
 		
-		a=16'b0011110011000011;b=16'b0000111111110000;
 		display();
 
-        a=16'b0001001000110100;b=16'b1001100001110110;
 		display();
 		$finish();	
 	end
