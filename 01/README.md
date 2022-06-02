@@ -97,5 +97,5 @@ vvp And16_tb.vvp
 diff And16.out And16.cmp
 ```
 
-
+其他逻辑电路相同。
 
