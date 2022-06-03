@@ -41,3 +41,6 @@
 03/Register.out
 04/CPU.out
 04/Memory.out
+02/HalfAdder.json
+02/pack.fs
+02/pnrHalfAdder.json
