@@ -14,6 +14,7 @@ module HalfAdder(
     // Xor(a=a, b=b, out=sum);
     // And(a=a, b=b, out=carry);
 
-
+    Xor XOR(.a(a),.b(b),.out(sum));
+    And AND(.a(a),.b(b),.out(carry));
 
 endmodule
