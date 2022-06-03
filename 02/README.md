@@ -57,5 +57,87 @@ openFPGALoader -b tangnano4k pack.fs
 
 ### 算术器
 
+先看看注释：
 
+```
+// if (zx == 1) set x = 0        // 16-bit constant
+// if (nx == 1) set x = !x       // bitwise not
+// if (zy == 1) set y = 0        // 16-bit constant
+// if (ny == 1) set y = !y       // bitwise not
+// if (f == 1)  set out = x + y  // integer 2's complement addition
+// if (f == 0)  set out = x & y  // bitwise and
+// if (no == 1) set out = !out   // bitwise not
+// if (out == 0) set zr = 1
+// if (out < 0) set ng = 1
+```
 
+- 当 zx 等于 1 ，x 常为 16 进制的 0
+- 当 nx 等于 1，x 取反。
+- 当 zy 等于 1 ，y 常为 16 进制的 0
+- 当 ny 等于 1，y 取反。
+- 当 f 等于 1，输出 x + y
+- 当 f 等于 0，输出 x & y
+- 当 no 等于 1，输出取反。
+- 当输出等于 0，zr 设为 1
+- 当输出小于 0，ng 设为 1
+
+减法、乘除法都可以转化成加法。逻辑运算也都可以转化为与非门（!(x & y) 就是与非门，可以通过设 f=0,no=1 来构建）。所以实现上述电路就可以计算所以算术。
+
+```verilog
+  wire[15:0] x1;
+        wire[15:0] x2;
+        wire[15:0] notx1;
+    	Mux16 MUX16x(.a(x),.b(16'b0000000000000000),.sel(zx),.out(x1));
+    	Not16 NOT16x(.in(x1),.out(notx1));
+        Mux16 MUX16x1(.a(x1),.b(notx1),.sel(nx),.out(x2));
+
+        wire[15:0] y1;
+        wire[15:0] y2;
+        wire[15:0] noty1;
+    	Mux16 MUX16y(.a(y),.b(16'b0000000000000000),.sel(zy),.out(y1));
+    	Not16 NOT16y(.in(y1),.out(noty1));
+        Mux16 MUX16y1(.a(y1),.b(noty1),.sel(ny),.out(y2));
+
+        wire[15:0] andxy;
+        wire[15:0] addxy;
+        wire[15:0] xy;
+        And16 AND16xy(.a(x2),.b(y2),.out(andxy));
+        Add16 ADD16xy(.a(x2),.b(y2),.out(addxy));
+        Mux16 MUX16andadd(.a(andxy),.b(addxy),.sel(f),.out(xy));
+
+        wire[15:0] notxy;
+        Not16 NOT16xy(.in(xy),.out(notxy));
+        Mux16 MUX16xy(.a(xy),.b(notxy),.sel(no),.out(out));
+        wire tmp = out[15];
+        wire[7:0] out07= out[7:0];
+        wire[7:0] out815 = out[15:8];
+
+        wire tmp1;
+        wire tmp2;
+        wire tmp3;
+        And AND(.a(tmp),.b(1'b1),.out(ng));
+        Or8Way OR8WAY07(.in(out07),.out(tmp1));
+        Or8Way OR8WAY815(.in(out815),.out(tmp2));
+        Or OR(.a(tmp1),.b(tmp2),.out(tmp3));
+        Not NOT(.in(tmp3),.out(zr));
+```
+
+25 行之前很好理解，按部就班实现。
+
+```verilog
+				wire tmp = out[15];
+        wire[7:0] out07= out[7:0];
+        wire[7:0] out815 = out[15:8];
+
+        wire tmp1;
+        wire tmp2;
+        wire tmp3;
+        And AND(.a(tmp),.b(1'b1),.out(ng));
+        Or8Way OR8WAY07(.in(out07),.out(tmp1));
+        Or8Way OR8WAY815(.in(out815),.out(tmp2));
+        Or OR(.a(tmp1),.b(tmp2),.out(tmp3));
+        Not NOT(.in(tmp3),.out(zr));
+```
+
+1. 按补码规定，最高位为 1 则整个数小于 0，所以第 8 行通过判断最高位是否为 1 来判断整个数是否小于 0。
+2. 9、10、11 其实判断每位是否不为 0，如果每一位都为 0 则 tmp3 为 0。zr 是 tmp3 取反。
