@@ -51,3 +51,12 @@ sim-not16:
 
 diff-not16:
 	diff Not16.out Not16.cmp
+
+compile-mux16:
+	iverilog -o Mux16_tb.vvp Mux16_tb.v
+
+sim-mux16:
+	vvp Mux16_tb.vvp
+
+diff-mux16:
+	diff Mux16.out Mux16.cmp
