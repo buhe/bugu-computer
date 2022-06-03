@@ -60,3 +60,12 @@ sim-mux16:
 
 diff-mux16:
 	diff Mux16.out Mux16.cmp
+
+compile-or8way:
+	iverilog -o Or8Way_tb.vvp Or8Way_tb.v
+
+sim-or8way:
+	vvp Or8Way_tb.vvp
+
+diff-or8way:
+	diff Or8Way.out Or8Way.cmp
