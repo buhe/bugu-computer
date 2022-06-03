@@ -122,7 +122,7 @@ openFPGALoader -b tangnano4k pack.fs
         Not NOT(.in(tmp3),.out(zr));
 ```
 
-25 行之前很好理解，按部就班实现。
+25 行之前很好理解，按部就班实现，不过要注意优先级。
 
 ```verilog
 				wire tmp = out[15];
