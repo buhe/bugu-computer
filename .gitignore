@@ -46,3 +46,5 @@
 02/pnrHalfAdder.json
 02/FullAdder_tb.vcd
 02/FullAdder_tb.vvp
+02/Add16_tb.vcd
+02/Add16_tb.vvp

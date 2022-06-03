@@ -14,3 +14,12 @@ sim-full:
 
 diff-full:
 	diff FullAdder.out FullAdder.cmp
+
+compile-add16:
+	iverilog -o Add16_tb.vvp Add16_tb.v
+
+sim-add16:
+	vvp Add16_tb.vvp
+
+diff-add16:
+	diff Add16.out Add16.cmp
