@@ -44,3 +44,5 @@
 02/HalfAdder.json
 02/pack.fs
 02/pnrHalfAdder.json
+02/FullAdder_tb.vcd
+02/FullAdder_tb.vvp

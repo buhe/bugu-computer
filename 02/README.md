@@ -23,6 +23,34 @@ openFPGALoader -b tangnano4k pack.fs
 
 ### 全加器
 
+全加器是考虑来自进位的一位加法器。简单的说就是三个一位相加。真值表如：
+
+| 输入 | 输出 |      |      |       |
+| ---- | ---- | ---- | ---- | ----- |
+| C    | A    | B    | sum  | carry |
+| 0    | 0    | 0    | 0    | 0     |
+| 0    | 0    | 1    | 1    | 0     |
+| 0    | 1    | 0    | 1    | 0     |
+| 0    | 1    | 1    | 0    | 1     |
+| 1    | 0    | 0    | 1    | 0     |
+| 1    | 0    | 1    | 0    | 1     |
+| 1    | 1    | 0    | 0    | 1     |
+| 1    | 1    | 1    | 1    | 1     |
+
+全加器可以用两个半加器和一个或门实现。
+
+```verilog
+    wire hsum;
+    wire hcarry;
+    HalfAdder HalfAdder1(.a(a),.b(b),.sum(hsum),.carry(hcarry));
+    wire hcarry2;
+    HalfAdder HalfAdder2(.a(c),.b(hsum),.sum(sum),.carry(hcarry2));
+    Or OR(.a(hcarry),.b(hcarry2),.out(carry));
+```
+
+- sum 很简单和 a + b + c 的 sum 相同。
+- carry 则有点麻烦，a + b 和 a + b 的 sum + c，有一个进位则 carry 为 1。
+
 ### 16 进制加法器
 
 ### 算术器
