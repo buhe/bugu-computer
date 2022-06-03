@@ -132,7 +132,7 @@ openFPGALoader -b tangnano4k pack.fs
         wire tmp1;
         wire tmp2;
         wire tmp3;
-        And AND(.a(tmp),.b(1'b1),.out(ng));
+/*line 8*/        And AND(.a(tmp),.b(1'b1),.out(ng));
         Or8Way OR8WAY07(.in(out07),.out(tmp1));
         Or8Way OR8WAY815(.in(out815),.out(tmp2));
         Or OR(.a(tmp1),.b(tmp2),.out(tmp3));
