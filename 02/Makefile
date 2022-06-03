@@ -23,3 +23,6 @@ sim-add16:
 
 diff-add16:
 	diff Add16.out Add16.cmp
+
+compile-alu:
+	iverilog -o ALU.vvp ALU.v

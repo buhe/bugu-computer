@@ -22,6 +22,11 @@
 // if (out < 0) set ng = 1
 
 `default_nettype none
+`include "Mux16.v"
+`include "Not16.v"
+`include "And16.v"
+`include "Add16.v"
+`include "Or8Way.v"
 module ALU(
 	input wire [15:0] x,		// input x (16 bit)
 	input wire [15:0] y,		// input y (16 bit)
@@ -59,5 +64,41 @@ module ALU(
 //    Or(a=tmp1,b=tmp2,out=tmp3);
 //    Not(in=tmp3,out=zr);
 
+        wire[15:0] x1;
+        wire[15:0] x2;
+        wire[15:0] notx1;
+    	Mux16 MUX16x(.a(x),.b(0),.sel(zx),.out(x1));
+    	Not16 NOT16x(.in(x1),.out(notx1));
+        Mux16 MUX16x1(.a(x1),.b(notx1),.sel(nx),.out(x2));
+
+        wire[15:0] y1;
+        wire[15:0] y2;
+        wire[15:0] noty1;
+    	Mux16 MUX16y(.a(y),.b(0),.sel(zy),.out(y1));
+    	Not16 NOT16y(.in(y1),.out(noty1));
+        Mux16 MUX16y1(.a(y1),.b(noty1),.sel(ny),.out(y2));
+
+        wire[15:0] andxy;
+        wire[15:0] addxy;
+        wire[15:0] xy;
+        And16 AND16xy(.a(x2),.b(y2),.out(andxy));
+        Add16 ADD16xy(.a(x2),.b(y2),.out(addxy));
+        Mux16 MUX16andadd(.a(andxy),.b(addxy),.sel(f),.out(xy));
+
+        wire[15:0] notxy;
+        Not16 NOT16xy(.in(xy),.out(notxy));
+        Mux16 MUX16xy(.a(xy),.b(notxy),.sel(no),.out(out));
+        wire tmp = out[15];
+        wire[7:0] out07= out[7:0];
+        wire[7:0] out815 = out[15:8];
+
+        wire tmp1;
+        wire tmp2;
+        wire tmp3;
+        And AND(.a(tmp),.b(1),.out(ng));
+        Or8Way OR8WAY07(.in(out07),.out(tmp1));
+        Or8Way OR8WAY815(.in(out815),.out(tmp2));
+        Or OR(.a(tmp1),.b(tmp2),.out(tmp3));
+        Not NOT(.in(tmp3),.out(zr));
 
 endmodule
