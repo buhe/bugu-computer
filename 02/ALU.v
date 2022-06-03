@@ -67,14 +67,14 @@ module ALU(
         wire[15:0] x1;
         wire[15:0] x2;
         wire[15:0] notx1;
-    	Mux16 MUX16x(.a(x),.b(0),.sel(zx),.out(x1));
+    	Mux16 MUX16x(.a(x),.b(16'b0000000000000000),.sel(zx),.out(x1));
     	Not16 NOT16x(.in(x1),.out(notx1));
         Mux16 MUX16x1(.a(x1),.b(notx1),.sel(nx),.out(x2));
 
         wire[15:0] y1;
         wire[15:0] y2;
         wire[15:0] noty1;
-    	Mux16 MUX16y(.a(y),.b(0),.sel(zy),.out(y1));
+    	Mux16 MUX16y(.a(y),.b(16'b0000000000000000),.sel(zy),.out(y1));
     	Not16 NOT16y(.in(y1),.out(noty1));
         Mux16 MUX16y1(.a(y1),.b(noty1),.sel(ny),.out(y2));
 
@@ -95,7 +95,7 @@ module ALU(
         wire tmp1;
         wire tmp2;
         wire tmp3;
-        And AND(.a(tmp),.b(1),.out(ng));
+        And AND(.a(tmp),.b(1'b1),.out(ng));
         Or8Way OR8WAY07(.in(out07),.out(tmp1));
         Or8Way OR8WAY815(.in(out815),.out(tmp2));
         Or OR(.a(tmp1),.b(tmp2),.out(tmp3));
