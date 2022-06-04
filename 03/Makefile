@@ -17,3 +17,12 @@ sim-bit:
 
 diff-bit:
 	diff Bit.out Bit.cmp
+
+compile-reg:
+	iverilog -o Register_tb.vvp Register_tb.v
+
+sim-reg:
+	vvp Register_tb.vvp
+
+diff-reg:
+	diff Register.out Register.cmp

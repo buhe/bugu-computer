@@ -4,12 +4,12 @@ module Register_tb();
 	integer file;
 
 	reg clk = 1;
-	wire out;
+	wire[15:0] out;
 	reg load = 0;
-	reg in=0;
+	reg[15:0] in=0;
     reg[9:0] t = 10'b0;
 
-	Bit BIT(
+	Register REGISTER(
     	.clk(clk),
 		.load(load),
 		.in(in),
@@ -24,7 +24,7 @@ module Register_tb();
 
 initial begin
   $dumpfile("Register_tb.vcd");
-  $dumpvars(0, Regester_tb);
+  $dumpvars(0, Register_tb);
     	file = $fopen("Register.out","w");
     	$fwrite(file, "|time|in|load|out|\n");
         display();
@@ -35,19 +35,19 @@ initial begin
 
         t=2;display();
 
-        in=1;load=0;display();
+        in=-32123;load=0;display();
 
         t=3;display();
 
-        in=1;load=1;display();
+        in=11111;load=0;display();
 
         t=4;display();
 
-        in=0;load=0;display();
+        in=-32123;load=1;display();
 
         t=5;display();
 
-        in=1;load=0;display();
+        in=-32123;load=1;display();
    $finish;
 end
 
