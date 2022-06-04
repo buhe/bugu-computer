@@ -3,7 +3,7 @@ module Bit_tb();
 
 	integer file;
 
-	reg clk = 0;
+	reg clk = 1;
 	wire out;
 	reg load = 0;
 	reg in=0;
