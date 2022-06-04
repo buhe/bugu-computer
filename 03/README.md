@@ -14,7 +14,9 @@ IO_LOC "in" 15;
 IO_LOC "clk" 45;
 ```
 
+### Bit
 
+bit 是一位存储。因为时序电路用到了 clk ，所以仿真时 clk 不会自动变化，需要添加 always #1 clk = ~clk; 来使 clk 每隔一个时钟周期翻转一次。
 
 ### 寄存器
 
