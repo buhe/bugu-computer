@@ -5,3 +5,12 @@ sym-d:
 
 flash:
 	openFPGALoader -b tangnano4k pack.fs
+
+compile-d:
+	iverilog -o DFF.vvp DFF.v
+
+sim-full:
+	vvp FullAdder_tb.vvp
+
+diff-full:
+	diff FullAdder.out FullAdder.cmp
