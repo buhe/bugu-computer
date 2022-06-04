@@ -10,4 +10,10 @@ compile-d:
 	iverilog -o DFF.vvp DFF.v
 
 compile-bit:
-	iverilog -o Bit.vvp Bit.v
+	iverilog -o Bit_tb.vvp Bit_tb.v
+
+sim-bit:
+	vvp Bit_tb.vvp
+
+diff-bit:
+	diff Bit.out Bit.cmp
