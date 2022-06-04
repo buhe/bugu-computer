@@ -9,8 +9,5 @@ flash:
 compile-d:
 	iverilog -o DFF.vvp DFF.v
 
-sim-full:
-	vvp FullAdder_tb.vvp
-
-diff-full:
-	diff FullAdder.out FullAdder.cmp
+compile-bit:
+	iverilog -o Bit.vvp Bit.v
