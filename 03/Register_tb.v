@@ -4,9 +4,9 @@ module Register_tb();
 	integer file;
 
 	reg clk = 1;
-	wire[15:0] out;
+	wire signed [15:0] out;
 	reg load = 0;
-	reg[15:0] in=0;
+	reg signed [15:0] in=0;
     reg[9:0] t = 10'b0;
 
 	Register REGISTER(
