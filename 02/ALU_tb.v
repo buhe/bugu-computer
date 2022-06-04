@@ -5,7 +5,7 @@ module ALU_tb();
 	integer file;
 
 	reg[15:0] x = 16'b0000000000000000;
-	reg[15:0] y = 16'b0000000000000000;
+	reg[15:0] y = 16'b1111111111111111;
     reg zx = 0;
     reg nx = 0;
     reg zy = 0;
@@ -41,23 +41,65 @@ module ALU_tb();
 		file = $fopen("ALU.out","w");
     	$fwrite(file, "|x|y|zx|nx|zy|ny|f|no|out|zr|ng|\n");
 		
-		a=16'b0000000000000000;b=16'b0000000000000000;
+        zx=1;nx=0;zy=1;ny=0;f=1;no=0;
 		display();
 
-        a=16'b0000000000000000;b=16'b1111111111111111;
-		display();
-  		
-		a=16'b1111111111111111;b=16'b1111111111111111;
+        zx=1;nx=1;zy=1;ny=1;f=1;no=1;
 		display();
 
-        a=16'b1010101010101010;b=16'b0101010101010101;
-		display();
-		
-		a=16'b0011110011000011;b=16'b0000111111110000;
+        zx=1;nx=1;zy=1;ny=0;f=1;no=0;
 		display();
 
-        a=16'b0001001000110100;b=16'b1001100001110110;
+        zx=0;nx=0;zy=1;ny=1;f=0;no=0;
 		display();
+
+        zx=1;nx=1;zy=0;ny=0;f=0;no=0;
+		display();
+
+        zx=0;nx=0;zy=1;ny=1;f=0;no=1;
+		display();
+
+        zx=1;nx=1;zy=0;ny=0;f=0;no=1;
+		display();
+
+        zx=0;nx=0;zy=1;ny=1;f=1;no=1;
+		display();
+
+        zx=1;nx=1;zy=0;ny=0;f=1;no=1;
+		display();
+
+        zx=0;nx=1;zy=1;ny=1;f=1;no=1;
+		display();
+
+        zx=1;nx=1;zy=0;ny=1;f=1;no=1;
+		display();
+
+        zx=0;nx=0;zy=1;ny=1;f=1;no=0;
+		display();
+
+        zx=1;nx=1;zy=0;ny=0;f=1;no=0;
+		display();
+
+        zx=0;nx=0;zy=0;ny=0;f=1;no=0;
+		display();
+
+        zx=0;nx=1;zy=0;ny=0;f=1;no=1;
+		display();
+
+        zx=0;nx=0;zy=0;ny=1;f=1;no=1;
+		display();
+
+        zx=0;nx=0;zy=0;ny=0;f=0;no=0;
+		display();
+
+        zx=0;nx=1;zy=0;ny=1;f=0;no=1;
+		display();
+
+        x = 16'b000000000010001;
+        y = 16'b000000000000011;
+        zx=0;nx=1;zy=0;ny=1;f=0;no=1;
+		display();
+
 		$finish();	
 	end
 
