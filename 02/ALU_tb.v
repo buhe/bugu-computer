@@ -97,9 +97,59 @@ module ALU_tb();
 
         x = 16'b000000000010001;
         y = 16'b000000000000011;
-        zx=0;nx=1;zy=0;ny=1;f=0;no=1;
+        zx=1;nx=0;zy=1;ny=0;f=1;no=0;
 		display();
 
+        zx=1;nx=1;zy=1;ny=1;f=1;no=1;
+		display();
+
+        zx=1;nx=1;zy=1;ny=0;f=1;no=0;
+		display();
+
+        zx=0;nx=0;zy=1;ny=1;f=0;no=0;
+		display();
+
+        zx=1;nx=1;zy=0;ny=0;f=0;no=0;
+		display();
+
+        zx=0;nx=0;zy=1;ny=1;f=0;no=1;
+		display();
+
+        zx=1;nx=1;zy=0;ny=0;f=0;no=1;
+		display();
+
+        zx=0;nx=0;zy=1;ny=1;f=1;no=1;
+		display();
+
+        zx=1;nx=1;zy=0;ny=0;f=1;no=1;
+		display();
+
+        zx=0;nx=1;zy=1;ny=1;f=1;no=1;
+		display();
+
+        zx=1;nx=1;zy=0;ny=1;f=1;no=1;
+		display();
+
+        zx=0;nx=0;zy=1;ny=1;f=1;no=0;
+		display();
+
+        zx=1;nx=1;zy=0;ny=0;f=1;no=0;
+		display();
+
+        zx=0;nx=0;zy=0;ny=0;f=1;no=0;
+		display();
+
+        zx=0;nx=1;zy=0;ny=0;f=1;no=1;
+		display();
+
+        zx=0;nx=0;zy=0;ny=1;f=1;no=1;
+		display();
+
+        zx=0;nx=0;zy=0;ny=0;f=0;no=0;
+		display();
+
+        zx=0;nx=1;zy=0;ny=1;f=0;no=1;
+		display();
 		$finish();	
 	end
 
