@@ -20,6 +20,6 @@ module Bit(
     // reg muxb;
     wire muxo;
     Mux MUX(.a(out),.b(in),.sel(load),.out(muxo));
-	DFF DFF1(.clk(clk),.in(muxo),.out(out));
+	DFFusr DFF1(.clk(clk),.in(muxo),.out(out));
 
 endmodule

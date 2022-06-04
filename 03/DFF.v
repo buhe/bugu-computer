@@ -6,7 +6,7 @@
 */
 
 `default_nettype none
-module DFF(
+module DFFusr(
 		input wire clk,
 		input wire in,
 		output reg out
