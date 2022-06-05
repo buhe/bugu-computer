@@ -28,4 +28,10 @@ diff-reg:
 	diff Register.out Register.cmp
 
 compile-pc:
-	iverilog -o PC.vvp PC.v
+	iverilog -o PC_tb.vvp PC_tb.v
+
+sim-pc:
+	vvp PC_tb.vvp
+
+diff-pc:
+	diff PC.out PC.cmp
