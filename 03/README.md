@@ -65,7 +65,7 @@ PC 又称程序计数器，主要由寄存器实现。PC 有三个条件，分�
 
 ### RAM
 
-现代体系结构中 RAM + io 映射等于所谓的主存，本节我们先实现 RAM 。根据 nand2tetris ，RAM 用寄存器实现，我们当然可以用寄存器实现，但为了更稳定和节省 LUT，实际采用 Fpga 的 BlockRAM 实现。
+现代体系结构中 RAM + io 映射等于所谓的主存，本节我们先实现 RAM 。根据 nand2tetris ，RAM 用寄存器实现，我们当然可以用寄存器实现，但为了节省 LUT，实际采用 Fpga 的 BlockRAM 实现。
 
 ```verilog
 module RAM(
