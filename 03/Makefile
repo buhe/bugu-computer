@@ -35,3 +35,12 @@ sim-pc:
 
 diff-pc:
 	diff PC.out PC.cmp
+
+compile-ram:
+	iverilog -o RAM_tb.vvp RAM_tb.v
+
+sim-ram:
+	vvp RAM_tb.vvp
+
+diff-ram:
+	diff RAM.out RAM.cmp
