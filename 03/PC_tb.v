@@ -13,7 +13,9 @@ module PC_tb();
 
 	PC PC1(
     	.clk(clk),
+		.reset(reset),
 		.load(load),
+		.inc(inc),
 		.in(in),
 		.out(out)
   	);
