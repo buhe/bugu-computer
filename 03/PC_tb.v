@@ -35,23 +35,23 @@ initial begin
 
         t=1;display();
 
-        in=0;load=1;display();
+        inc=1;display();
 
         t=2;display();
 
-        in=-32123;load=0;display();
+        in=-32123;display();
 
         t=3;display();
 
-        in=11111;load=0;display();
+        load=1;display();
 
         t=4;display();
 
-        in=-32123;load=1;display();
+        load=0;display();
 
         t=5;display();
 
-        in=-32123;load=1;display();
+        display();
    $finish;
 end
 

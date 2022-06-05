@@ -48,7 +48,7 @@ output;
 
 tick,
 output;
-
+--
 tock,
 output;
 
