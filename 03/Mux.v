@@ -4,9 +4,6 @@
  *       b otherwise
  */
 `default_nettype none
-`include "Not.v"
-`include "And.v"
-`include "Or.v"
 module Mux(
 	input a,
 	input b,

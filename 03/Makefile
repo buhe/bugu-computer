@@ -26,3 +26,6 @@ sim-reg:
 
 diff-reg:
 	diff Register.out Register.cmp
+
+compile-pc:
+	iverilog -o PC.vvp PC.v
