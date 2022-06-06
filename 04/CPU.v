@@ -85,7 +85,48 @@ module CPU(
     // A reg
     wire[15:0] outputM;
     wire[15:0] Ainput;
-    Mux16 MUX161(.a(instruction),.b(outputM),.sel(instruction[15]),.out(Ainput));
+    Mux16 MUX16a(.a(instruction),.b(outputM),.sel(instruction[15]),.out(Ainput));
+    Not NOT1(.in(in[0]), .out(out[0]));
+    Or OR1(.a(in[0]),.b(in[1]),.out(temp01));
+    Register REGISTER1(.in(nextout3),.load(1'b1),.out(out), .clk(clk));
 
+    // D reg
+    Register REGISTER1(.in(nextout3),.load(1'b1),.out(out), .clk(clk));
+
+    // ALU
+    Mux16 MUX16alu(.a(instruction),.b(outputM),.sel(instruction[15]),.out(Ainput));
+    ALU ALU(
+	    .x(x),
+		.y(y),
+        .zx(zx),
+        .nx(nx),
+        .zy(zy),
+        .ny(ny),
+        .f(f),
+        .no(no),
+	    .out(out),
+	    .zr(zr),
+	    .ng(ng)
+	  );
+
+
+    // PC
+    And AND1(.a(instruction[15]),.b(instruction[5]),.out(d1));
+    And AND2(.a(instruction[15]),.b(instruction[4]),.out(d2));
+    Not NOT1(.in(in[0]), .out(out[0]));
+    Not NOT1(.in(in[0]), .out(out[0]));
+    And AND1(.a(instruction[15]),.b(instruction[5]),.out(d1));
+    And AND2(.a(instruction[15]),.b(instruction[4]),.out(d2));
+    Or OR1(.a(in[0]),.b(in[1]),.out(temp01));
+    Or OR1(.a(in[0]),.b(in[1]),.out(temp01));
+    Not NOT1(.in(in[0]), .out(out[0]));
+    	PC PC1(
+    	.clk(clk),
+		.reset(reset),
+		.load(load),
+		.inc(inc),
+		.in(in),
+		.out(out)
+  	);
 
 endmodule
