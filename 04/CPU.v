@@ -69,5 +69,23 @@ module CPU(
     // Not(in=jump,out=inc);
     // PC(in=Areg ,load=jump ,inc=inc ,reset=reset ,out[0..14]=pc );
 
+    wire d1;
+    wire d2;
+    wire d3;
+    wire j1;
+    wire j2;
+    wire j3;
+    And AND1(.a(instruction[15]),.b(instruction[5]),.out(d1));
+    And AND2(.a(instruction[15]),.b(instruction[4]),.out(d2));
+    And AND3(.a(instruction[15]),.b(instruction[3]),.out(d3));
+    And AND4(.a(instruction[15]),.b(instruction[2]),.out(j1));
+    And AND5(.a(instruction[15]),.b(instruction[1]),.out(j2));
+    And AND6(.a(instruction[15]),.b(instruction[0]),.out(j3));
+
+    // A reg
+    wire[15:0] outputM;
+    wire[15:0] Ainput;
+    Mux16 MUX161(.a(instruction),.b(outputM),.sel(instruction[15]),.out(Ainput));
+
 
 endmodule
