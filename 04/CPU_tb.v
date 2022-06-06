@@ -20,6 +20,7 @@ module CPU_tb();
 		.addressM(addressM),
 		.pc(pc)
 	);
+    
 	 
 	always #1 clk = ~clk;
 

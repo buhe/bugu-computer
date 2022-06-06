@@ -37,9 +37,9 @@ module CPU(
 
 // your implementation comes here:
 
-    // And(a=instruction[15] ,b=instruction[5] ,out=d1 );
-    // And(a=instruction[15] ,b=instruction[4] ,out=d2 );
-    // And(a=instruction[15] ,b=instruction[3] ,out=d3,out=writeM );
+    // And(a=instruction[15] ,b=instruction[5] ,out=d1 ); A
+    // And(a=instruction[15] ,b=instruction[4] ,out=d2 ); D
+    // And(a=instruction[15] ,b=instruction[3] ,out=d3,out=writeM ); M
     // And(a=instruction[15] ,b=instruction[2] ,out=j1 );
     // And(a=instruction[15] ,b=instruction[1] ,out=j2 );
     // And(a=instruction[15] ,b=instruction[0] ,out=j3 );
@@ -54,18 +54,18 @@ module CPU(
     // DRegister(in=outputM ,load=d2 ,out=Dreg );
 
     // //ALU
-    // Mux16(a=Areg,b=inM,sel=instruction[12],out=y);
+    // Mux16(a=Areg,b=inM,sel=instruction[12],out=y); when a == 1 opr M else opr A
     // ALU(x=Dreg ,y=y ,zx=instruction[11] ,nx=instruction[10] ,zy=instruction[9] ,ny=instruction[8] ,f=instruction[7] ,no=instruction[6] ,out=outputM ,out=outM,zr=zr ,ng=ng );
 
     // //PC
-    // And(a=ng,b=j1,out=tmp1);
-    // And(a=zr,b=j2,out=tmp2);
+    // And(a=ng,b=j1,out=tmp1); < 0
+    // And(a=zr,b=j2,out=tmp2); == 0
     // Not(in=zr,out=notzr);
     // Not(in=ng,out=notng);
-    // And(a=notzr,b=notng,out=ps);
+    // And(a=notzr,b=notng,out=ps); > 0
     // And(a=ps,b=j3,out=tmp3);
     // Or(a=tmp1,b=tmp2,out=tmp);
-    // Or(a=tmp,b=tmp3,out=jump);
+    // Or(a=tmp,b=tmp3,out=jump); when != 000 jump
     // Not(in=jump,out=inc);
     // PC(in=Areg ,load=jump ,inc=inc ,reset=reset ,out[0..14]=pc );
 
