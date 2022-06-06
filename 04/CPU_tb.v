@@ -28,7 +28,7 @@ module CPU_tb();
 	always #1 clk = ~clk;
 
 	task display;
-    	#1 $fwrite(file, "|%6d|%6d|%16b|  %1b  |%6d|  %1b   |%6d|%6d|\n",t,inM,instruction,reset,outM,writeM,addressM,pc);
+    	#1 $fwrite(file, "|%6d|%6d|%16b|  %1b  |%6d|  %1b   |%6d|%6d|\n",t,inM,instruction,reset,outM,writeM,addressM[14:0],pc);
   	endtask
   	
   	initial begin
