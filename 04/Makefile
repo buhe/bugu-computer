@@ -1,8 +1,8 @@
 compile-cpu:
-	iverilog -o CPU.vvp CPU.v
+	iverilog -o CPU_tb.vvp CPU_tb.v
 
-sim-bit:
-	vvp Bit_tb.vvp
+sim-cpu:
+	vvp CPU_tb.vvp
 
 diff-bit:
-	diff Bit.out Bit.cmp
+	diff CPU.out CPU.cmp

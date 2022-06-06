@@ -1,3 +1,4 @@
+`include "CPU.v"
 `default_nettype none
 module CPU_tb();
 
@@ -20,7 +21,7 @@ module CPU_tb();
 		.addressM(addressM),
 		.pc(pc)
 	);
-    
+
 	 
 	always #1 clk = ~clk;
 
