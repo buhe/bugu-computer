@@ -2,6 +2,8 @@
 
 ### CPU
 
+#### 操作目标和是否跳转
+
 ```verilog
     wire d1;
     wire d2;
@@ -18,6 +20,8 @@
     And AND6(.a(instruction[15]),.b(instruction[0]),.out(j3));
 ```
 
+#### A 寄存器
+
 
 
 ```verilog
@@ -33,12 +37,16 @@
     assign addressM = Areg;
 ```
 
+#### D 寄存器
+
 
 
 ```verilog
     wire[15:0] Dreg;
     Register REGISTER1d(.in(outputM),.load(d2),.out(Dreg), .clk(clk));
 ```
+
+#### ALU
 
 
 
@@ -62,6 +70,8 @@ wire[15:0] y;
 	  );
       assign outM = outputM; 
 ```
+
+#### PC
 
 
 
