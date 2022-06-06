@@ -3,7 +3,7 @@
 module CPU_tb();
 
 	integer file;
-	reg clk = 0;	
+	reg clk = 1;	
 	reg [15:0] inM=0;
 	reg [15:0] instruction=0;
 	reg reset=0;
