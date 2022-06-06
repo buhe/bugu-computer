@@ -2,7 +2,27 @@
 
 ### CPU
 
-#### 操作目标和是否跳转
+硬件和机器语言某种程度上是一一对应的，先确定机器语言再根据机器语言设计对应的硬件。
+
+nand2tetris 的机器语言很简单，分为 A 指令和 C 指令，A 指令主要用来指定数字放进 A 寄存器中，C 指令用来访存，计算等。规范如下：
+
+![n2t_4_4](https://tva1.sinaimg.cn/large/e6c9d24egy1h2yslot438j20gl03pglu.jpg)
+
+
+
+![n2t_4_5](https://tva1.sinaimg.cn/large/e6c9d24egy1h2ysm1labhj20hb04jaae.jpg)
+
+规范没有什么特别的，人为设计的，指令等长、精简。
+
+#### 操作目标和跳转规范
+
+
+![n2t_4_7](https://tva1.sinaimg.cn/large/e6c9d24egy1h2ysnb6oboj20gy0620te.jpg)
+
+![n2t_4_8](https://tva1.sinaimg.cn/large/e6c9d24egy1h2ysnji2tij20eq06kwev.jpg)
+
+操作目标和跳转规则如上
+
 
 ```verilog
     wire d1;
@@ -20,9 +40,9 @@
     And AND6(.a(instruction[15]),.b(instruction[0]),.out(j3));
 ```
 
+通过这些简单的 verilog 来确定操作目标和跳转规则，d1 ~ d3 指定操作目标，j1 ~ j3 指定跳转规则，额外的 d3 付给 writeM 指定是否写内存。
+
 #### A 寄存器
-
-
 
 ```verilog
     wire[15:0] outputM;
@@ -37,18 +57,18 @@
     assign addressM = Areg;
 ```
 
+首先判断是 A 还是 C 指令，A 指令一定写入 A 寄存器，C 指令操作目标是否含有 A 寄存器，如果满足则写入 A 寄存器。
+
 #### D 寄存器
-
-
 
 ```verilog
     wire[15:0] Dreg;
     Register REGISTER1d(.in(outputM),.load(d2),.out(Dreg), .clk(clk));
 ```
 
+如果操作目标含有 D 寄存器，则 ALU 的计算结果赋给 D 寄存器。
+
 #### ALU
-
-
 
 ```verilog
 wire[15:0] y;
@@ -71,9 +91,11 @@ wire[15:0] y;
       assign outM = outputM; 
 ```
 
+![n2t_4_6](https://tva1.sinaimg.cn/large/e6c9d24egy1h2yt9ep6r9j20fa0d7aas.jpg)
+
+根据指令的 12 ~ 6 位，决定 ALU 的计算规则。
+
 #### PC
-
-
 
 ```verilog
     wire tmp1;
