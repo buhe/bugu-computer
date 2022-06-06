@@ -3,14 +3,16 @@
 module CPU_tb();
 
 	integer file;
-	reg clk=0;	
+	reg clk = 1;	
 	reg [15:0] inM=0;
 	reg [15:0] instruction=0;
 	reg reset=0;
-	wire [15:0] outM;
+	wire signed [15:0] outM;
 	wire writeM;
 	wire [15:0] addressM;
 	wire [15:0] pc;
+    reg[9:0] t = 10'b0;
+
 	CPU CPU(
 		.clk(clk),
 		.inM(inM),
@@ -26,29 +28,34 @@ module CPU_tb();
 	always #1 clk = ~clk;
 
 	task display;
-    	#1 $fwrite(file, "| %16b | %16b | %16b | %1b | %16b | %1b | %16b |\n",pc,inM,instruction,reset,outM,writeM,addressM);
+    	#1 $fwrite(file, "|%6d|%6d|%16b|%1b|%6d|%1b|%6d|%6d|\n",t,inM,instruction,reset,outM,writeM,addressM,pc);
   	endtask
   	
   	initial begin
   		$dumpfile("CPU_tb.vcd");
   		$dumpvars(0, CPU_tb);
 		file = $fopen("CPU.out","w");
-    	$fwrite(file, "|       pc         |       inM        |    instruction   |rst|       outM       |wM |    addressM      |\n");
+    	$fwrite(file, "time|inM|instruction|reset|outM|writeM|addre|pc|\n");
 		
 
-#2 instruction = 16'b0011000000111001; // @12345
+instruction = 16'b0011000000111001; // @12345
+display();
+t=1;display();
+
+instruction = 16'b1110110000010000; // D=A
+display();
 display();
 
-#2 instruction = 16'b1110110000010000; // D=A
+instruction = 16'b0101101110100000; // @23456
+display();
 display();
 
-#2 instruction = 16'b0101101110100000; // @23456
+instruction = 16'b1110000111010000; // D=A-D
+display();
 display();
 
-#2 instruction = 16'b1110000111010000; // D=A-D
+instruction = 16'b0000001111101000; // @1000
 display();
-
-#2 instruction = 16'b0000001111101000; // @1000
 display();
 
 #2 instruction = 16'b1110001100001000; // M=D
