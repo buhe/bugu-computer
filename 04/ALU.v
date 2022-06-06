@@ -22,7 +22,6 @@
 // if (out < 0) set ng = 1
 
 `default_nettype none
-`include "Mux16.v"
 `include "Not16.v"
 `include "And16.v"
 `include "Add16.v"

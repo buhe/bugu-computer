@@ -19,7 +19,10 @@
  * CPU jumps to address 0 (i.e. pc is set to 0 in next time step) rather 
  * than to the address resulting from executing the current instruction. 
  */
-
+`include "Mux16.v"
+`include "Register.v"
+`include "ALU.v"
+`include "PC.v"
 `default_nettype none
 module CPU(
 		input clk,
@@ -96,11 +99,11 @@ module CPU(
     assign addressM = Areg;
 
     // D reg
-    wire Dreg;
+    wire[15:0] Dreg;
     Register REGISTER1d(.in(outputM),.load(d2),.out(Dreg), .clk(clk));
 
     // ALU
-    wire y;
+    wire[15:0] y;
     wire zr;
     wire ng;
     Mux16 MUX16alu(.a(Areg),.b(inM),.sel(instruction[12]),.out(y));

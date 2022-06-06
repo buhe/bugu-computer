@@ -4,7 +4,7 @@
  *                        b[i] if sel == 1
  */
 `default_nettype none
-
+`include "Mux.v"
 module Mux16(
 	input [15:0] a,
 	input [15:0] b,

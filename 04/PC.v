@@ -6,9 +6,6 @@
  */
 
 `default_nettype none
-`include "Mux16.v"
-`include "Register.v"
-`include "Add16.v"
 module PC(
 	input wire clk,
 	input wire reset,
