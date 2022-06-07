@@ -4,7 +4,7 @@ compile-cpu:
 sim-cpu:
 	vvp CPU_tb.vvp
 
-diff-bit:
+diff-cpu:
 	diff CPU.out CPU.cmp
 
 compile-mem:
