@@ -78,7 +78,7 @@ module Memory(
     Mux16 MUX162(
 		.a(outRAM),
 		.b(tmp),
-		.sel(address[10]),
+		.sel(address[13]),
 	    .out(out)
 	  );
     
