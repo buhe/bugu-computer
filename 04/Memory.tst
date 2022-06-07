@@ -19,8 +19,15 @@ echo "Before you run this script, select the 'Screen' option from the 'View' men
 // the bad writes may occur.
 
 //// Set RAM[2000], RAM[4000] = 12345 (for following overwrite test)
-set in 12345, set load 1, set address %X2000, tick, output; tock, output;
-set address %X4000, tick, output; tock, output;
+set in 12345,
+set load 1, 
+set address %X2000, 
+tick, output; 
+tock, output;
+
+set address %X4000, 
+tick, output; 
+tock, output;
 
 
 set in -1,				// Set RAM[0] = -1

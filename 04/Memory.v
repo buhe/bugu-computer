@@ -16,50 +16,51 @@
 
 `default_nettype none
 module Memory(
+    input clk,
 	input wire [15:0] address,
 	input wire load,
 	output wire [15:0] out,
-	output wire loadRAM,
-	output wire load0000,
-	output wire load0001,
-	output wire load0010,
-	output wire load0011,
-	output wire load0100,
-	output wire load0101,
-	output wire load0110,
-	output wire load0111,
-	output wire load1000,
-	output wire load1001,
-	output wire load1010,
-	output wire load1011,
-	output wire load1100,
-	output wire load1101,
-	output wire load1110,
-	output wire load1111,
-	input wire [15:0] inRAM,
-	input wire [15:0] in0000,
-	input wire [15:0] in0001,
-	input wire [15:0] in0010,
-	input wire [15:0] in0011,
-	input wire [15:0] in0100,
-	input wire [15:0] in0101,
-	input wire [15:0] in0110,
-	input wire [15:0] in0111,
-	input wire [15:0] in1000,
-	input wire [15:0] in1001,
-	input wire [15:0] in1010,
-	input wire [15:0] in1011,
-	input wire [15:0] in1100,
-	input wire [15:0] in1101,
-	input wire [15:0] in1110,
-	input wire [15:0] in1111
+	input wire [15:0] in
 );
 
 //your implementation comes here:
+    // DMux(in=load ,sel=address[14] ,a=load1 ,b=load2 );
+    // DMux(in=load2,sel=address[13] ,a=load21,b=load22);
+    // RAM16K(in=in ,load=load1 ,address=address[0..13] ,out=out1 );
+    // Screen(in=in ,load=load21 ,address=address[0..12] ,out=out2 );
+    // Keyboard(out= out3);
+    // Mux16(a=out2 ,b=out3 ,sel=address[13] ,out=tmp);
+    // Mux16(a=out1 ,b=tmp ,sel=address[14] ,out=out );
 
+    wire loadRAM;
+    wire loadIO;
+    wire loadBtn;
+    wire loadLed;
+    DMux DMUX1(
+	    .in(load),
+	    .sel(address[13]),
+	    .a(loadRAM),
+		.b(loadIO)
+	  );
+    DMux DMUX2(
+	    .in(loadIO),
+	    .sel(address[0]),
+	    .a(loadBtn),
+		.b(loadLed)
+	  );
 
+    wire[15:0] outRAM;
+    RAM RAM1(
+    	.clk(clk),
+		.address(address),
+		.load(loadRAM),
+		.in(in),
+		.out(outRAM)
+  	);
 
-
+    // button only write ram
+    And AND1(.a(btn),.b(instruction[5]),.out(d1));
+    // led only read ram
 
 
 
