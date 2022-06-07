@@ -3,7 +3,7 @@
  * If load[t] == 1 then out[t+1] = in[t]
  *    else out does not change (out[t+1] = out[t])
  */
-`include "DFF.v"
+`include "DFFusr.v"
 `default_nettype none
 module Bit(
 	input wire clk,
