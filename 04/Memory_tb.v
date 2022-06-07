@@ -49,10 +49,24 @@ initial begin
     display();
     display();
 
-    address=16'd8192;
+    address=16'd1000;
     display();
+    address=16'd1200;
+    display();
+
+    in=12345;load=1;address=16'h0000;
+    display();
+    display();
+
     address=16'd8193;
     display();
+    display();
+
+    in=2222;load=1;address=16'd1000;
+    display();
+    display();
+
+
 
   $finish;
 end
