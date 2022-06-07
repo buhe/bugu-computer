@@ -189,7 +189,7 @@ module Btn(
 endmodule
 ```
 
-LED 的 verilog ，如果 load 为 1 则 in 的第一位替换 out 的第一位，反之则保留上一个状态，这里有个副作用是 assign led = prev; ，把当前的状态赋给 led 变量，然后把当前状态保存在 DFF 中。最后根据 out 的第一位返回 out 。
+LED 的 verilog ，如果 load 为 1 则 in 的第一位替换 out 的第一位，反之则保留上一个状态，这里有个副作用是 assign led = prev; ，把当前的状态赋给 led 变量，进而改变 led 。然后把当前状态保存在 DFF 中。最后根据 out 的第一位返回 out 。
 
 ```verilog
 `default_nettype none
@@ -205,7 +205,8 @@ module Led(
     assign led = prev;
     wire outLow;
 	DFFusr DFF1(.clk(clk),.in(prev),.out(outLow));
-          Mux16 MUX161(
+     
+  Mux16 MUX161(
 		.a(16'b0000000000000000),
 		.b(16'b0000000000000001),
 		.sel(outLow),
