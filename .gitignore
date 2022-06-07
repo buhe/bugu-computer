@@ -70,3 +70,5 @@
 04/CPU_tb.vvp
 04/CPU_tb.vcd
 04/Memory.vvp
+04/Memory_tb.vcd
+04/Memory_tb.vvp

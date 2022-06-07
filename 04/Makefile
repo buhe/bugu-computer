@@ -8,10 +8,10 @@ diff-bit:
 	diff CPU.out CPU.cmp
 
 compile-mem:
-	iverilog -o Memory.vvp Memory.v
+	iverilog -o Memory_tb.vvp Memory_tb.v
 
 sim-mem:
-	vvp CPU_tb.vvp
+	vvp Memory_tb.vvp
 
 diff-mem:
-	diff CPU.out CPU.cmp
+	diff Memory.out Memory.cmp
