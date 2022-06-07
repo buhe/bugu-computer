@@ -15,3 +15,6 @@ sim-mem:
 
 diff-mem:
 	diff Memory.out Memory.cmp
+
+compile-rom:
+	iverilog -o ROM.vvp ROM.v

@@ -13,7 +13,7 @@ module ROM(
 );
 
 	// ROM file of hack
-	parameter ROMFILE = "../asm/led/led.hack";
+	parameter ROMFILE = "./led.hack";
 	
 	reg [15:0] mem [0:2047];
 	assign instruction = mem[pc[10:0]];
