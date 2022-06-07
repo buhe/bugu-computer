@@ -19,6 +19,8 @@ module Memory(
     input clk,
 	input wire [15:0] address,
 	input wire load,
+	input wire btn,
+	output wire led,
 	output wire [15:0] out,
 	input wire [15:0] in
 );
@@ -58,9 +60,32 @@ module Memory(
 		.out(outRAM)
   	);
 
-    // button only write ram
-    And AND1(.a(btn),.b(instruction[5]),.out(d1));
-    // led only read ram
+    // button - only read ram
+    // And AND1(.a(btn),.b(1'b1),.out(16'b00000000000000001));
+    wire[15:0] outBtn;
+    Btn BTN(.clk(clk), .out(outBtn));
+    // led - only write ram
+    wire[15:0] outLed;
+    // And AND2(.a(btn),.b(1'b1),.out(16'b00000000000000001));
+    // if(loadLed) 
+    //     assign led = in[0];
+    Led LED(.clk(clk), .in(in), .out(outLed), .load(loadLed));
+    
+    wire[15:0] tmp;
+    Mux16 MUX161(
+		.a(outBtn),
+		.b(outLed),
+		.sel(address[0]),
+	    .out(tmp)
+	  );
+    
+    Mux16 MUX162(
+		.a(outRAM),
+		.b(tmp),
+		.sel(address[10]),
+	    .out(out)
+	  );
+    
 
 
 
