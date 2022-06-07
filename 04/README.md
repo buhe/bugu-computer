@@ -138,3 +138,103 @@ wire[15:0] y;
 |0-2047| RAM|R/W|R0--R15, static, stack, heap|
 | 8192 - 第 14 位 | but - 16 位 |R/W|0 = button pressed, 1 = button released|
 | 8193 - 第 14，1 位 | led - 16 位 |R/W|0 = led off, 1 = led on|
+
+通过判断第 14 位，确定是访问 RAM 还是映射 IO 。
+
+```verilog
+   DMux DMUX1(
+	    .in(load),
+	    .sel(address[13]),
+	    .a(loadRAM),
+		.b(loadIO)
+	  );
+```
+
+进而判断第 1 位，确定是访问按钮还是 LED 。
+
+```verilog
+  DMux DMUX2(
+	    .in(loadIO),
+	    .sel(address[0]),
+	    .a(loadBtn),
+		.b(loadLed)
+	  );
+```
+
+通过抽象按钮和 LED 简化逻辑
+
+```verilog
+    // button - only read
+    wire[15:0] outBtn;
+    Btn BTN(.out(outBtn), .btn(btn));
+    // led - only write
+    wire[15:0] outLed;
+    Led LED(.clk(clk), .in(in), .out(outLed), .load(loadLed), .led(led));
+```
+
+按钮的 verilog，当 btn 设为 0 则 out 为 16'b0000000000000000，反之为 16'b0000000000000001 。可见返回值依赖 btn 的值。
+
+```verilog
+`default_nettype none
+module Btn(
+    input btn,
+	output wire[15:0] out
+);
+      Mux16 MUX161(
+		.a(16'b0000000000000000),
+		.b(16'b0000000000000001),
+		.sel(btn),
+	    .out(out)
+	  );
+endmodule
+```
+
+LED 的 verilog ，如果 load 为 1 则 in 的第一位替换 out 的第一位，反之则保留上一个状态，这里有个副作用是 assign led = prev; ，把当前的状态赋给 led 变量，然后把当前状态保存在 DFF 中。最后根据 out 的第一位返回 out 。
+
+```verilog
+`default_nettype none
+module Led(
+    input clk,
+	input wire load,
+    output wire led,
+	output wire[15:0] out,
+	input wire[15:0] in
+);
+    wire prev;
+    Mux MUX(.a(outLow),.b(in[0]),.sel(load),.out(prev));
+    assign led = prev;
+    wire outLow;
+	DFFusr DFF1(.clk(clk),.in(prev),.out(outLow));
+          Mux16 MUX161(
+		.a(16'b0000000000000000),
+		.b(16'b0000000000000001),
+		.sel(outLow),
+	    .out(out)
+	  );
+endmodule
+```
+
+最后根据地址的第 14 位和第一位确定 memory 的最终返回值
+
+```verilog
+    Mux16 MUX161(
+		.a(outBtn),
+		.b(outLed),
+		.sel(address[0]),
+	    .out(tmp)
+	  );
+    
+    Mux16 MUX162(
+		.a(outRAM),
+		.b(tmp),
+		.sel(address[13]),
+	    .out(out)
+	  );
+```
+
+### ROM
+
+
+
+### 组装
+
