@@ -66,6 +66,20 @@ initial begin
     display();
     display();
 
+    in=9999;load=0;
+    display();
+    display();
+
+    address=16'h0000;
+    display();
+    address=16'd1200;
+    display();
+
+    load=0;address=16'h0001;
+    display();
+    address=16'h0002;
+    display();
+
 
 
   $finish;
