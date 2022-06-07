@@ -83,29 +83,37 @@ instruction = 16'b0000000000001110; // @14
 display();
 t=11;display();
 
-// #2 instruction = 16'b1110001100000100; // D;jlt
-// display();
+instruction = 16'b1110001100000100; // D;jlt
+display();
+t=12;display();
 
-// #2 instruction = 16'b0000001111100111; // @999
-// display();
+instruction = 16'b0000001111100111; // @999
+display();
+t=13;display();
 
-// #2 instruction = 16'b1110110111100000; // A=A+1
-// display();
+instruction = 16'b1111110111100000; // A=M+1
+display();
+t=14;display();
 
-// #2 instruction = 16'b1110001100001000; // M=D
-// display();
+instruction = 16'b1110001100101000; // AM=D
+display();
+t=15;display();
 
-// #2 instruction = 16'b0000000000010101; // @21
-// display();
+instruction = 16'b0000000000010101; // @21
+display();
+t=16;display();
 
-// #2 instruction = 16'b1110011111000010; // D+1;jeq
-// display();
+instruction = 16'b1110011111000010; // D+1;jeq
+display();
+t=17;display();
 
-// #2 instruction = 16'b0000000000000010; // @2
-// display();
+instruction = 16'b0000000000000010; // @2
+display();
+t=18;display();
 
-// #2 instruction = 16'b1110000010010000; // D=D+A
-// display();
+instruction = 16'b1110000010111000; // AMD=D+A
+display();
+t=19;display();
 
 // #2 instruction = 16'b0000001111101000; // @1000
 // display();
