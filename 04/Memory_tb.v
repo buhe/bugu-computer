@@ -5,7 +5,7 @@ integer file;
 reg clk = 1;
 reg [15:0] address = 16'h1FFC;
 reg load = 1;
-wire [15:0] out;
+wire signed [15:0] out;
 reg btn = 1;
 wire led;
 reg signed [15:0] in= 16'h0000;
@@ -39,6 +39,19 @@ initial begin
 
     in=1;load=1;address=16'd8193;
     display();
+    display();
+
+    in=-1;load=1;address=16'h0000;
+    display();
+    display();
+
+    in=9999;load=0;
+    display();
+    display();
+
+    address=16'd8192;
+    display();
+    address=16'd8193;
     display();
 
   $finish;
