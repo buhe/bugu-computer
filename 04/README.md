@@ -235,7 +235,69 @@ endmodule
 
 ### ROM
 
+ROM 和 RAM 差不多，不同的是加载了 led.hack 的二进制到 mem 中。然后根据 pc 返回 instruction ，由于开源的综合工具不能生成 block RAM ，所以这里只声明了 3 位 mem 以免使用过多 LUT 综合不了。
 
+```verilog
+`default_nettype none
+
+module ROM(
+	input wire [15:0] pc,
+	output wire [15:0] instruction		
+);
+
+	// ROM file of hack
+	parameter ROMFILE = "./led.hack";
+	
+	reg [15:0] mem [0:10];
+	assign instruction = mem[pc[3:0]];
+	
+	initial begin
+		$readmemb(ROMFILE,mem);
+	end
+
+endmodule
+```
 
 ### 组装
+
+最后把 CPU、Memory、ROM 组装起来。
+
+```verilog
+ wire [15:0] addressM;
+    wire [15:0] outM;
+    wire [15:0] instruction;
+    wire [15:0] pc;
+    wire [15:0] Mout;
+
+    wire writeM;
+
+	ROM ROM(
+		.instruction(instruction),
+		.pc(pc)
+	);
+	CPU CPU(
+		.clk(clk_out),
+		.inM(Mout),
+		.instruction(instruction),
+		.reset(~reset),
+		.outM(outM),
+		.writeM(writeM),
+		.addressM(addressM),
+		.pc(pc)
+	);
+
+	Memory MEMORY(
+		.clk(clk_out),
+		.address(addressM),
+		.in(outM),
+		.out(Mout),
+		.load(writeM),
+        .btn(btn),
+        .led(led)
+	);
+```
+
+1. ROM 根据 CPU 返回的 pc 产生指令
+2. CPU 负责计算指令，通过 pc 指定下一条指令
+3. CPU 如果要操作内存则把 address 提供给 Memory
 
