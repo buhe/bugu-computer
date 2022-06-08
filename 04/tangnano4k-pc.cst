@@ -1,4 +1,5 @@
 // these are the HDMI pins!
 IO_LOC "led" 10; // red
 IO_LOC "btn" 15;
+IO_LOC "reset" 14;
 IO_LOC "clk" 45;
