@@ -15,8 +15,8 @@ module ROM(
 	// ROM file of hack
 	parameter ROMFILE = "./led.hack";
 	
-	reg [15:0] mem [0:2047];
-	assign instruction = mem[pc[10:0]];
+	reg [15:0] mem [0:10];
+	assign instruction = mem[pc[3:0]];
 	
 	initial begin
 		$readmemb(ROMFILE,mem);

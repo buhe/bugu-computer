@@ -14,9 +14,9 @@ module RAM(
 	output wire [15:0] out
 );
 	
-	reg [15:0] regRAM [0:2047]; 
+	reg [15:0] regRAM [0:10]; 
 	always @(negedge clk)
-		if (load) regRAM[address[10:0]] <= in;
+		if (load) regRAM[address[3:0]] <= in;
 
-	assign out = regRAM[address[10:0]];
+	assign out = regRAM[address[3:0]];
 endmodule
