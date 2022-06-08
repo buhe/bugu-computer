@@ -4,6 +4,7 @@
  * preloaded with 2048 x 16bit of Hackcode holding the bootloader.
  * 
  * instruction = ROM[pc]
+ * tangnano4k not support block ram https://github.com/YosysHQ/yosys/wiki/FPGA-family-feature-matrix
  */
 `default_nettype none
 

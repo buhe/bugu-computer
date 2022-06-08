@@ -1,6 +1,5 @@
 /**
-* BlockRAM of iCE40
-* implements 2048 words of RAM addressed from 0000 - 2047
+* tangnano4k not support block ram https://github.com/YosysHQ/yosys/wiki/FPGA-family-feature-matrix
 * out = M[address] (continuosly assigned using combinatorial logic)
 * if (load =i= 1) M[address][t+1] = in[t] (clocked using sequential logic)
 */

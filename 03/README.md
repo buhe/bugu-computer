@@ -65,7 +65,7 @@ PC 又称程序计数器，主要由寄存器实现。PC 有三个条件，分�
 
 ### RAM
 
-现代体系结构中 RAM + io 映射等于所谓的主存，本节我们先实现 RAM 。根据 nand2tetris ，RAM 用寄存器实现，我们当然可以用寄存器实现，但为了节省 LUT，实际采用 Fpga 的 BlockRAM 实现。
+现代体系结构中 RAM + io 映射等于所谓的主存，本节我们先实现 RAM 。根据 nand2tetris ，RAM 用寄存器实现，让 verilog 自己生成。当然更正确的做法是使用 Fpga 的 block RAM ，但是开源工具不支持： https://github.com/YosysHQ/yosys/wiki/FPGA-family-feature-matrix 。
 
 ```verilog
 module RAM(
@@ -76,15 +76,15 @@ module RAM(
 	output wire [15:0] out
 );
 	
-	reg [15:0] regRAM [0:2047]; 
+  reg [15:0] regRAM [0:10]; 
 	always @(negedge clk)
-		if (load) regRAM[address[10:0]] <= in;
+    if (load) regRAM[address[3:0]] <= in;
 
-	assign out = regRAM[address[10:0]];
+  assign out = regRAM[address[3:0]];
 endmodule
 ```
 
-低 11 位都用来访问 RAM ，regRAM 代表 2048 个 16 位空间，综合之后变成 32k（16 * 2048 / 1024 = 32） 的 BlockRAM 。tangnano4k 一共有 180k BlockRAM ，所以完全够用。
+低 4 位都用来访问 RAM ，regRAM 代表 10 个 16 位空间。
 
 > 关于 BlockRAM：http://xilinx.eetrend.com/blog/2020/100049862.html
 
