@@ -9,7 +9,7 @@
 `include "Or.v"
 `include "RAM.v"
 `include "Register.v"
-`include "ALU.v"
+`include "ALUusr.v"
 `include "PC.v"
 `include "Not16.v"
 `include "And16.v"

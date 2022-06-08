@@ -104,7 +104,8 @@ module CPU(
     wire zr;
     wire ng;
     Mux16 MUX16alu(.a(Areg),.b(inM),.sel(instruction[12]),.out(y));
-    ALU ALU(
+    
+    ALUusr ALU(
 	    .x(Dreg),
 		.y(y),
         .zx(instruction[11]),
