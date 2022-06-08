@@ -4,7 +4,7 @@ module Computer_tb();
 reg clk_in = 0;
 reg btn = 0;
 wire led;
-reg reset = 1;
+reg reset = 0;
 
 Computer
   HACK1(

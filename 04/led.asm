@@ -3,10 +3,10 @@
 // read the button state and write the result
 
 (LOOP)
-@8193		//read BUT
+@8192		//read BUT
 D=M
 
-@8192		//write LED
+@8193		//write LED
 M=D
 
 @LOOP
