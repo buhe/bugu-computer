@@ -19,6 +19,7 @@
 `include "Memory.v"
 `include "CPU.v"
 `include "ROM.v"
+`include "Clk.v"
 module Computer( 
     input clk_in,				// external clock 100 MHz	
     input btn,			// buttons	(0 if pressed, 1 if released)
@@ -29,6 +30,11 @@ module Computer(
     // ROM32K(address=pc ,out=instruction );
     // CPU(inM=Mout ,instruction=instruction ,reset=reset ,outM=outM ,writeM=writeM ,addressM=addressM ,pc=pc );
     // Memory(in=outM ,load=writeM ,address=addressM ,out=Mout );
+    wire clk_out;
+    Clk CLK(
+		.in(clk_in),
+		.out(clk_out)
+	);
 
     wire [15:0] addressM;
     wire [15:0] outM;
@@ -43,10 +49,10 @@ module Computer(
 		.pc(pc)
 	);
 	CPU CPU(
-		.clk(clk_in),
+		.clk(clk_out),
 		.inM(Mout),
 		.instruction(instruction),
-		.reset(reset),
+		.reset(~reset),
 		.outM(outM),
 		.writeM(writeM),
 		.addressM(addressM),
@@ -54,7 +60,7 @@ module Computer(
 	);
 
 	Memory MEMORY(
-		.clk(clk_in),
+		.clk(clk_out),
 		.address(addressM),
 		.in(outM),
 		.out(Mout),

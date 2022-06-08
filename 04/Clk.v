@@ -11,11 +11,22 @@
 
 module Clk(
 	input wire in,			//external clock 100Mz
-	output wire out			//Hack clock 33.333333 MHz
+	output reg out = 1'b0			//Hack clock 33.333333 MHz
 );
 
 // your implementation comes here:
+parameter NUM_DIV = 5;
+reg [15:0] cnt = 16'd0;
+// assign out <= 1'b0;
 
-
+always @(posedge in)
+   if(cnt < NUM_DIV) begin
+        cnt     <= cnt + 1'b1;
+        out    <= out;
+    end
+    else begin
+        cnt     <= 16'd0;
+        out    <= ~out;
+    end
 
 endmodule

@@ -2,9 +2,9 @@
 module Computer_tb();
 
 reg clk_in = 0;
-reg btn = 0;
+reg btn = 1;
 wire led;
-reg reset = 0;
+reg reset = 1;
 
 Computer
   HACK1(
@@ -19,10 +19,7 @@ always #1 clk_in = ~clk_in;
 initial begin
   $dumpfile("Computer_tb.vcd");
   $dumpvars(0, Computer_tb);
-
-#50 btn=1;
-#50 btn=0;
-#50
+#150
   $finish;
 end
 
