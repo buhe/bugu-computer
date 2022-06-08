@@ -27,3 +27,11 @@ sim-com:
 
 diff-com:
 	diff Computer.out Computer.cmp
+
+sym-com:
+	yosys -p "read_verilog Computer.v; synth_gowin -json Computer.json"
+	nextpnr-gowin --json Computer.json --write pnrComputer.json --device GW1NSR-LV4CQN48PC6/I5 --cst tangnano4k-com.cst
+	gowin_pack -d GW1NSR-LV4CQN48PC6/I5 -o pack.fs pnrComputer.json
+
+flash:
+	openFPGALoader -b tangnano4k pack.fs
