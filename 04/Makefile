@@ -18,3 +18,12 @@ diff-mem:
 
 compile-rom:
 	iverilog -o ROM.vvp ROM.v
+
+compile-com:
+	iverilog -o Computer_tb.vvp Computer_tb.v
+
+sim-com:
+	vvp Computer_tb.vvp
+
+diff-com:
+	diff Computer.out Computer.cmp

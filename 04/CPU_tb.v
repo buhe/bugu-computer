@@ -1,3 +1,15 @@
+`include "Mux16.v"
+`include "Register.v"
+`include "ALU.v"
+`include "PC.v"
+`include "Not16.v"
+`include "And16.v"
+`include "Add16.v"
+`include "Or8Way.v"
+`include "And.v"
+`include "Not.v"
+`include "Or.v"
+
 `include "CPU.v"
 `default_nettype none
 module CPU_tb();

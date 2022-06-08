@@ -4,9 +4,7 @@
 */
 
 `default_nettype none
-`include "And.v"
-`include "Not.v"
-`include "Or.v"
+
 module Xor(
 	input wire a,
 	input wire b,

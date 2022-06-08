@@ -1,4 +1,21 @@
 `default_nettype none
+`include "Mux16.v"
+`include "DMux.v"
+`include "Btn.v"
+`include "Led.v"
+
+`include "Not.v"
+`include "And.v"
+`include "Or.v"
+`include "RAM.v"
+`include "Register.v"
+`include "ALU.v"
+`include "PC.v"
+`include "Not16.v"
+`include "And16.v"
+`include "Add16.v"
+`include "Or8Way.v"
+
 `include "Memory.v"
 `include "CPU.v"
 `include "ROM.v"

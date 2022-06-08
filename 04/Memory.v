@@ -15,16 +15,6 @@
 */
 
 `default_nettype none
-`include "Mux16.v"
-`include "DMux.v"
-`include "Btn.v"
-`include "Led.v"
-
-`include "Not.v"
-`include "And.v"
-`include "Or.v"
-`include "DFFusr.v"
-`include "RAM.v"
 module Memory(
     input clk,
 	input wire [15:0] address,

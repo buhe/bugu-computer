@@ -22,10 +22,7 @@
 // if (out < 0) set ng = 1
 
 `default_nettype none
-`include "Not16.v"
-`include "And16.v"
-`include "Add16.v"
-`include "Or8Way.v"
+
 module ALU(
 	input wire [15:0] x,		// input x (16 bit)
 	input wire [15:0] y,		// input y (16 bit)
