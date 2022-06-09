@@ -303,5 +303,37 @@ endmodule
 
 ### 降低频率
 
+仿真正确，烧录到硬件上指令执行的太快了，需要降低频率。
+
+```verilog
+`default_nettype none
+
+module Clk(
+	input wire in,			//external clock 100Mz
+	output reg out = 1'b0			//Hack clock 33.333333 MHz
+);
+
+// your implementation comes here:
+parameter NUM_DIV = 5;
+reg [15:0] cnt = 16'd0;
+// assign out <= 1'b0;
+
+always @(posedge in)
+   if(cnt < NUM_DIV) begin
+        cnt     <= cnt + 1'b1;
+        out    <= out;
+    end
+    else begin
+        cnt     <= 16'd0;
+        out    <= ~out;
+    end
+
+endmodule
+```
+
+时钟频率降低 5 倍后，再烧录到硬件就可以了，最后看看我们完整的结果--可以执行任意汇编的计算机。
+
+[<img src="https://tva1.sinaimg.cn/large/e6c9d24egy1h2qp7wk0ttj20c60iadh8.jpg" alt="" style="zoom:50%;" />](https://youtube.com/shorts/UHfUUAZkFgE?feature=share)
+
 
 > 代码：https://github.com/buhe/bugu-computer/tree/master/04
