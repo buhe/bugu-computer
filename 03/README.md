@@ -89,3 +89,5 @@ endmodule
 > 关于 BlockRAM：http://xilinx.eetrend.com/blog/2020/100049862.html
 
 > 关于 LUT：https://cloud.tencent.com/developer/article/1794053
+
+> 代码：https://github.com/buhe/bugu-computer/tree/master/03

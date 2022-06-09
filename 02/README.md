@@ -141,3 +141,5 @@ openFPGALoader -b tangnano4k pack.fs
 
 1. 按补码规定，最高位为 1 则整个数小于 0，所以第 8 行通过判断最高位是否为 1 来判断整个数是否小于 0。
 2. 9、10、11 其实判断每位是否不为 0，如果每一位都为 0 则 tmp3 为 0。zr 是 tmp3 取反。
+
+> 代码：https://github.com/buhe/bugu-computer/tree/master/02

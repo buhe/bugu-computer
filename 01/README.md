@@ -99,3 +99,4 @@ diff And16.out And16.cmp
 
 其他逻辑电路相同。
 
+> 代码：https://github.com/buhe/bugu-computer/tree/master/01

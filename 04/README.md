@@ -301,3 +301,7 @@ endmodule
 2. CPU 负责计算指令，通过 pc 指定下一条指令
 3. CPU 如果要操作内存则把 address 提供给 Memory
 
+### 降低频率
+
+
+> 代码：https://github.com/buhe/bugu-computer/tree/master/04
